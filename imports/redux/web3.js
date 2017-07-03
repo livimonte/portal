@@ -21,7 +21,8 @@ type ObservedState = {
   isSynced: boolean,
   isConnected: boolean,
   currentBlock: number,
-  currentBlockServer: number,
+  currentBlockWebServer: number,
+  currentBlockSyncServer: number,
   // balance in ETH is stored as a string with precision
   // '1.234' and not '1231'
   balance: string,
@@ -42,7 +43,8 @@ export const initialState: State = {
   isSynced: false,
   isConnected: false,
   currentBlock: 0,
-  currentBlockServer: 0,
+  currentBlockWebServer: 0,
+  currentBlockSyncServer: 0,
   readyState: 'Loading',
   isReady: false,
   balance: '0',

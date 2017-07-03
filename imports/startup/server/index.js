@@ -2,4 +2,4 @@
 import '/imports/startup/server/sync-collections';
 
 // Helper Method to determine if server is connected
-import '/imports/api/methods/getServerBlockNumber';
+import '/imports/api/methods/getServerStatus';

@@ -23,9 +23,15 @@ async function updateWeb3() {
   };
 
   try {
-    web3State.currentBlockServer = await pify(Meteor.call)(
-      'getServerBlockNumber',
-    );
+    const serverStatus = await pify(Meteor.call)('getServerStatus');
+    web3State.currentBlockWebServer = serverStatus.currentBlockWebServer;
+    web3State.currentBlockSyncServer = serverStatus.currentBlockSyncServer;
+
+    if (web3State.currentBlockSyncServer === 0) {
+      console.warn('Sync server out of sync');
+    } else if (web3State.currentBlockWebServer === 0) {
+      console.warn('Web server out of sync');
+    }
 
     const accounts = await pify(web3.eth.getAccounts)();
     if (accounts.length) {

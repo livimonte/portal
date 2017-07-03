@@ -9,7 +9,9 @@ const getReadyState = (state: State): DerivedState => {
   const balance = new BigNumber(state.balance);
   // we accept the server to be one block ahead/behind, but not more
   const isServerConnected =
-    Math.abs(state.currentBlock - state.currentBlockServer) <= 1;
+    Math.abs(state.currentBlock - state.currentBlockWebServer) <= 1 &&
+    Math.abs(state.currentBlock - state.currentBlockSyncServer) <= 1 &&
+    Math.abs(state.currentBlockWebServer - state.currentBlockSyncServer) <= 1;
 
   if (
     balance.gt(0) &&

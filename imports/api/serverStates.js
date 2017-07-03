@@ -4,6 +4,7 @@ import { Mongo } from 'meteor/mongo';
 
 import web3 from '/imports/lib/web3';
 import { networkMapping } from '/imports/melon/interface/helpers/specs';
+import pkg from '/package.json';
 
 const ServerStates = new Mongo.Collection('serverStates');
 
@@ -21,6 +22,8 @@ ServerStates.watch = () => {
     const nodeEnv = process.env.NODE_ENV;
     const rootURL = process.env.ROOT_URL;
     const galaxyAppId = process.env.GALAXY_APP_ID;
+    const portalVersion = pkg.version;
+    const protocolVersion = pkg.dependencies['@melonproject/protocol'];
 
     ServerStates.upsert(
       { hostname },
@@ -33,6 +36,8 @@ ServerStates.watch = () => {
         nodeEnv,
         rootURL,
         galaxyAppId,
+        portalVersion,
+        protocolVersion,
       },
     );
   });
