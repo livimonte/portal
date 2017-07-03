@@ -69,7 +69,7 @@ Template.portalNew.events({
         addressList.riskMgmt,
         addressList.managementFee,
         addressList.performanceFee,
-        { from: Session.get('selectedAccount') },
+        { from: Session.get('selectedAccount'), gas: '3500000' },
       )
       .then((result) => {
         let id;
@@ -79,7 +79,9 @@ Template.portalNew.events({
             console.log('Vault has been created');
             console.log(`Vault id: ${id}`);
             Session.set('isNew', true);
-            toastr.success('Fund successfully created! You can now invest in your fund!');
+            toastr.success(
+              'Fund successfully created! You can now invest in your fund!',
+            );
           }
         }
         return versionContract.getVault(id);
@@ -95,7 +97,9 @@ Template.portalNew.events({
         FlowRouter.go(`/fund/${address}`);
       })
       .catch((err) => {
-        toastr.error('Oops, an error has occurred. Please verify your fund informations.');
+        toastr.error(
+          'Oops, an error has occurred. Please verify your fund informations.',
+        );
         Session.set('NetworkStatus', {
           isInactive: false,
           isMining: false,
