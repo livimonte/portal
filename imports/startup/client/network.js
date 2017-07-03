@@ -6,8 +6,7 @@ import store from '/imports/startup/client/store';
 import { creators } from '/imports/redux/web3';
 import { networkMapping } from '/imports/melon/interface/helpers/specs';
 
-const baseInterval = 4000;
-let interval = 4000;
+const CHECK_ACCOUNT_INTERVAL = 4000;
 
 async function updateWeb3() {
   const provider = (() => {
@@ -35,17 +34,9 @@ async function updateWeb3() {
       web3State.balance = balance ? balance.div(10 ** 18).toString() : null;
       web3State.currentBlock = await pify(web3.eth.getBlockNumber)();
       web3State.isSynced = !await pify(web3.eth.getSyncing)();
-      interval = baseInterval;
     }
   } catch (e) {
-    interval *= 2;
-    console.warn(
-      'Error with web3 connection. Doubling polling interval to:',
-      interval,
-      e,
-    );
-  } finally {
-    window.setTimeout(updateWeb3, interval);
+    console.warn('Error with web3 connection.');
   }
 
   const previousState = store.getState().web3;
@@ -58,6 +49,14 @@ async function updateWeb3() {
   if (needsUpdate) store.dispatch(creators.update(web3State));
 }
 
+async function checkAccounts() {
+  const accounts = await pify(web3.eth.getAccounts)();
+  if (accounts.length <= 0) {
+    updateWeb3();
+  }
+  window.setTimeout(checkAccounts, CHECK_ACCOUNT_INTERVAL);
+}
+
 // We need to wait for the page load instead of meteor startup
 // to be certain that metamask is injected.
 window.addEventListener('load', function() {
@@ -65,5 +64,11 @@ window.addEventListener('load', function() {
   window.__AppInitializedBeforeWeb3__ = true;
   /* eslint-enable */
   updateWeb3();
-  window.setTimeout(updateWeb3, interval);
+  web3.eth.filter('latest').watch(() => {
+    updateWeb3();
+  });
+
+  // if the user locks metamask `web3.eth.filter` just stops silently
+  // that's why we need to check the accounts in parallel
+  window.setTimeout(checkAccounts, CHECK_ACCOUNT_INTERVAL);
 });
