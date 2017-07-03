@@ -1,11 +1,15 @@
 {
+  "private": {
+    "SENTRY_DSN": "https://*:*@sentry.io/*"
+  },
   "public": {
     "analyticsSettings": {
       "Google Analytics": {
         "trackingId": "UA-80990528-3"
       }
     },
-    "disableSync": false
+    "disableSync": false,
+    "SENTRY_PUBLIC_DSN": "https://8adc460522b445ff9c79e8afe570eea0@sentry.io/187062"
   },
   "galaxy.meteor.com": {
     "env": {

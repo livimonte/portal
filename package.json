@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "scripts": {
-    "start": "meteor",
+    "start": "meteor --settings ./settings/dev.json",
     "lint": "eslint .",
     "flow": "flow",
     "jest": "jest",
@@ -44,6 +44,9 @@
     "meteor-node-stubs": "~0.2.0",
     "moment": "^2.18.1",
     "pify": "^3.0.0",
+    "raven": "^2.1.0",
+    "raven-for-redux": "^1.0.0",
+    "raven-js": "^3.16.1",
     "redux": "^3.6.0",
     "select2": "^4.0.3",
     "truffle-contract": "^2.0.1",

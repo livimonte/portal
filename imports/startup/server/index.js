@@ -1,3 +1,5 @@
+import '/imports/startup/server';
+
 // Syncs all the collections according to the blockchain state
 import '/imports/startup/server/sync-collections';
 
