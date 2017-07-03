@@ -188,9 +188,30 @@
       <div id="results" class="col-md-12 text-center error-message">
         <img src="/dist/img/insufficient_funds.png">
         <h2 class="about-title">Insufficient funds</h2>
-        <p>In order to create a fund, you need to have some kovan test ether in your wallet.</p>
-        <a href="https://github.com/kovan-testnet/faucet" class="btn btn-def btn-light-blue" target="blank" rel="noopener">Get some k-ethers here</a>
+        <p>In order to create a fund, you need to have some Kovan test ether in your wallet.</p>
+        <p>You can get verified with your email address to receive some Kovan ether.</p>
+        <div class="line-divider"></div>
+        <form class="col s12 new-portfolio" id="email">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="setup-form">
+                <div class="mp-form">
+                  <div class="form-group">
+                    <input id="userEmail" type="email" class="form-control validate" minlength="3" placeholder="Your email address" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 btn-portfolio text-left">
+              <button type="submit" class="btn btn-light-blue">Get verified!</button>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </form>
       </div>
+      <!--<a href="https://github.com/kovan-testnet/faucet" class="btn btn-def btn-light-blue" target="blank" rel="noopener">Get some k-ethers here</a>-->
     </div>
   </div>
 </template>
