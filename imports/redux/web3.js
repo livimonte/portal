@@ -21,18 +21,19 @@ type ObservedState = {
   isSynced: boolean,
   isConnected: boolean,
   currentBlock: number,
+  currentBlockServer: number,
+  // balance in ETH is stored as a string with precision
+  // '1.234' and not '1231'
   balance: string,
   network?: Networks,
   account?: string,
-  provider?: Providers,
-  // balance in ETH is stored as a string with precision
-  // '1.234' and not '1231'
-  isServerConnected?: boolean
+  provider?: Providers
 };
 
 export type DerivedState = {
   readyState: ReadyState,
-  isReady: boolean
+  isReady: boolean,
+  isServerConnected: boolean
 };
 
 export type State = ObservedState & DerivedState;
@@ -41,10 +42,12 @@ export const initialState: State = {
   isSynced: false,
   isConnected: false,
   currentBlock: 0,
+  currentBlockServer: 0,
   readyState: 'Loading',
   isReady: false,
   balance: '0',
   gasLimit: '3500000',
+  isServerConnected: false,
 };
 
 export const types = {

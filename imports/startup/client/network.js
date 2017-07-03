@@ -1,4 +1,3 @@
-// / Remark: Code mostly taken from: https://github.com/makerdao/maker-market
 import pify from 'pify';
 
 import web3 from '/imports/lib/web3/client';
@@ -24,7 +23,9 @@ async function updateWeb3() {
   };
 
   try {
-    web3State.isServerConnected = await pify(Meteor.call)('isServerConnected');
+    web3State.currentBlockServer = await pify(Meteor.call)(
+      'getServerBlockNumber',
+    );
 
     const accounts = await pify(web3.eth.getAccounts)();
     if (accounts.length) {

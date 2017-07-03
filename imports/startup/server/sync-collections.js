@@ -5,7 +5,7 @@ import Assets from '/imports/api/assets';
 import Vaults from '/imports/api/vaults';
 import Orders from '/imports/api/orders';
 import Trades from '/imports/api/trades';
-import Users from '/imports/api/users';
+import serverStates from '/imports/api/serverStates';
 
 // EXECUTION
 Meteor.startup(() => {
@@ -22,5 +22,7 @@ Meteor.startup(() => {
 
     Trades.remove({});
     Trades.watch();
+
+    serverStates.watch();
   }
 });
