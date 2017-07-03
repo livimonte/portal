@@ -44,6 +44,7 @@ export const initialState: State = {
   readyState: 'Loading',
   isReady: false,
   balance: '0',
+  gasLimit: '3500000',
 };
 
 export const types = {

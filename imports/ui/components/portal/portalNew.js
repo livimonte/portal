@@ -6,7 +6,7 @@ import VersionJson from '@melonproject/protocol/build/contracts/Version.json';
 // Smart Contracts
 import web3 from '/imports/lib/web3/client';
 import addressList from '/imports/melon/interface/addressList';
-
+import store from '/imports/startup/client/store';
 import './portalNew.html';
 
 const Version = contract(VersionJson);
@@ -49,6 +49,8 @@ Template.portalNew.events({
     const PORTFOLIO_NAME = templateInstance.find('input#portfolio_name').value;
     const PORTFOLIO_SYMBOL = 'MLN-P';
     const PORTFOLIO_DECIMALS = 18;
+    const gasLimit = store.getState().web3.gasLimit;
+
     // Deploy
     const versionContract = Version.at(addressList.version);
     Session.set('NetworkStatus', {
@@ -57,6 +59,7 @@ Template.portalNew.events({
       isError: false,
       isMined: false,
     });
+
     versionContract
       .createVault(
         PORTFOLIO_NAME,
@@ -69,7 +72,7 @@ Template.portalNew.events({
         addressList.riskMgmt,
         addressList.managementFee,
         addressList.performanceFee,
-        { from: Session.get('selectedAccount'), gas: '3500000' },
+        { from: Session.get('selectedAccount'), gas: gasLimit },
       )
       .then((result) => {
         let id;
