@@ -9,8 +9,6 @@ import Users from '/imports/api/users';
 
 // EXECUTION
 Meteor.startup(() => {
-  console.log(Meteor.settings);
-
   if (!Meteor.settings.public.disableSync) {
     Assets.remove({});
 
