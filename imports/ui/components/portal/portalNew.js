@@ -41,10 +41,18 @@ Template.portalNew.events({
     event.preventDefault();
     Version.setProvider(web3.currentProvider);
 
+    if (!templateInstance.find('input#email').value) {
+      alert('Please enter your email address.');
+      return;
+    }
+
     if (!templateInstance.find('input#portfolio_name').value) {
       alert('Please enter a portfolio name.');
       return;
     }
+
+    console.log(templateInstance.find('input#email').value);
+
     // Description input parameters
     const PORTFOLIO_NAME = templateInstance.find('input#portfolio_name').value;
     const PORTFOLIO_SYMBOL = 'MLN-P';
