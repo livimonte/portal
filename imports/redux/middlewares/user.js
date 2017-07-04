@@ -24,13 +24,13 @@ const userMiddleware = store => next => (action) => {
       if (currentAccount !== updatedAccount) {
         const user = Users.findOne({ address: updatedAccount });
         if (user) {
-          store.dispatch(creators.updateIsRegistered(true));
           if (user.verified) {
-            store.dispatch(creators.updateIsVerified(true));
+            store.dispatch(creators.updateVerification(true, true));
+          } else {
+            store.dispatch(creators.updateVerification(true, false));
           }
         } else {
-          store.dispatch(creators.updateIsRegistered(false));
-          store.dispatch(creators.updateIsVerified(false));
+          store.dispatch(creators.updateVerification(false, false));
         }
       }
       break;
