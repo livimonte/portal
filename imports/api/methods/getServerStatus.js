@@ -9,6 +9,14 @@ Meteor.methods({
     const hostname =
       process.env.KADIRA_OPTIONS_HOSTNAME || os.hostname() || 'unknown';
     const webServerState = ServerStates.findOne({ hostname });
+
+    if (!webServerState) {
+      return {
+        currentBlockWebServer: 0,
+        currentBlockSyncServer: 0,
+      };
+    }
+
     const syncServerQuery = {
       disableSync: false,
       nodeEnv: webServerState.nodeEnv,
