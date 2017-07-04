@@ -45,21 +45,16 @@ export const initialState: State = {
   isReady: false,
   balance: '0',
   gasLimit: '3500000',
-  isRegistered: false,
 };
 
 export const types = {
   UPDATE: 'UPDATE:network:portal.melonport.com',
-  REGISTER: 'REGISTER:network:portal.melonport.com',
 };
 
 export const creators = {
   update: newState => ({
     type: types.UPDATE,
     ...newState,
-  }),
-  register: () => ({
-    type: types.REGISTER,
   }),
 };
 
@@ -77,13 +72,6 @@ export const reducer = (state: State = initialState, action: string) => {
       return {
         ...newState,
         ...getReadyState(newState),
-      };
-    }
-
-    case types.REGISTER: {
-      return {
-        ...state,
-        isRegistered: true,
       };
     }
 

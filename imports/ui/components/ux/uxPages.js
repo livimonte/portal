@@ -5,7 +5,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import Users from '/imports/api/users';
 
 import store from '/imports/startup/client/store';
-import { creators } from '/imports/redux/web3';
+import { creators } from '/imports/redux/user';
 
 // Corresponding html file
 import './uxPages.html';
@@ -45,7 +45,7 @@ Template.uxInsufficientFunds.onCreated(() => {
   const template = Template.instance();
   template.isRegistered = new ReactiveVar(false);
   store.subscribe(() => {
-    const currentState = store.getState().web3;
+    const currentState = store.getState().user;
     template.isRegistered.set(currentState.isRegistered);
   });
 });
@@ -58,7 +58,6 @@ Template.uxInsufficientFunds.events({
     event.preventDefault();
     const email = templateInstance.find('input#userEmail').value;
     const address = Session.get('selectedAccount');
-    Meteor.call('users.add', { email, address });
-    store.dispatch(creators.register());
+    store.dispatch(creators.register(email, address));
   },
 });

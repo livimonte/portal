@@ -13,6 +13,7 @@ Users.add = (userInfo) => {
   Users.insert({
     email,
     address,
+    verified: false,
   });
 };
 
