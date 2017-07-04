@@ -1,9 +1,12 @@
 import pify from 'pify';
+import { Meteor } from 'meteor/meteor';
 
 import web3 from '/imports/lib/web3/client';
 import store from '/imports/startup/client/store';
 import { creators } from '/imports/redux/web3';
 import { networkMapping } from '/imports/melon/interface/helpers/specs';
+
+import Raven from '/imports/startup/utils/raven';
 
 const CHECK_ACCOUNT_INTERVAL = 4000;
 
@@ -29,8 +32,10 @@ async function updateWeb3() {
 
     if (web3State.currentBlockSyncServer === 0) {
       console.warn('Sync server out of sync');
+      Raven.captureMessage('Sync server out of sync');
     } else if (web3State.currentBlockWebServer === 0) {
       console.warn('Web server out of sync');
+      Raven.captureMessage('Web server out of sync');
     }
 
     const accounts = await pify(web3.eth.getAccounts)();
@@ -48,7 +53,8 @@ async function updateWeb3() {
       web3State.currentBlock = 0;
     }
   } catch (e) {
-    console.warn('Error with web3 connection.');
+    console.warn('Error with web3 connection.', e);
+    Raven.captureException(e);
   }
 
   const previousState = store.getState().web3;

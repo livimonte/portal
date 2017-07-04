@@ -1,4 +1,3 @@
-// / Remark: Code mostly taken from: https://github.com/makerdao/maker-market
 import { Meteor } from 'meteor/meteor';
 // Collections
 import Assets from '/imports/api/assets';
@@ -9,6 +8,8 @@ import serverStates from '/imports/api/serverStates';
 
 // EXECUTION
 Meteor.startup(() => {
+  serverStates.watch();
+
   if (!Meteor.settings.public.DISABLE_SYNC) {
     Assets.remove({});
 
@@ -22,7 +23,5 @@ Meteor.startup(() => {
 
     Trades.remove({});
     Trades.watch();
-
-    serverStates.watch();
   }
 });

@@ -1,5 +1,6 @@
 import os from 'os';
 import pify from 'pify';
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
 import web3 from '/imports/lib/web3';
