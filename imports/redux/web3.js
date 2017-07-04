@@ -74,6 +74,7 @@ export const reducer = (state: State = initialState, action: string) => {
         ...getReadyState(newState),
       };
     }
+
     default:
       return state;
   }
