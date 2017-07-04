@@ -2,6 +2,11 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
+function validateEmail(email) {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+
 const Users = new Mongo.Collection('users');
 if (Meteor.isServer) {
   Meteor.publish('users', () => Users.find());
@@ -21,7 +26,8 @@ Meteor.methods({
   'users.add': (userInfo) => {
     check(userInfo.email, String);
     check(userInfo.address, String);
-    if (Meteor.isServer) Users.add(userInfo);
+    const isEmailCorrect = /\S+@\S+\.\S+/.test(userInfo.email);
+    if (Meteor.isServer && isEmailCorrect) Users.add(userInfo);
   },
 });
 
