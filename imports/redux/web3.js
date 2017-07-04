@@ -10,8 +10,8 @@ export type Providers =
 export type Networks = "Rinkeby" | "Ropsten" | "Kovan" | "Main" | "Private";
 export type ReadyState =
   | "Loading"
-  | "Server Not Connected"
   | "Client Not Connected"
+  | "Server Not Connected"
   | "No Account Selected"
   | "Unsupported Network"
   | "Insufficient Fund"
@@ -57,7 +57,7 @@ export const types = {
 };
 
 export const creators = {
-  update: newState => ({
+  update: (newState: State) => ({
     type: types.UPDATE,
     ...newState,
   }),

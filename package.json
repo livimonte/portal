@@ -39,6 +39,7 @@
     "babel-runtime": "^6.23.0",
     "bootstrap-switch": "^3.3.3",
     "cryptocompare": "^0.1.0",
+    "immutable": "^3.8.1",
     "jquery": "^3.1.1",
     "meteor-node-stubs": "~0.2.0",
     "moment": "^2.18.1",

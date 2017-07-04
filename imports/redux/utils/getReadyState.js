@@ -1,71 +1,49 @@
 // @flow
+import { OrderedMap } from 'immutable';
 import BigNumber from 'bignumber.js';
-import type { Networks, DerivedState, State } from '../web3.js';
+import type {
+  Networks,
+  ObservedState,
+  DerivedState,
+  ReadyState,
+  State,
+} from '../web3.js';
 
 const isNetworkSupported = (network: Networks): boolean =>
   ['Kovan'].includes(network);
 
-const getReadyState = (state: State): DerivedState => {
-  const balance = new BigNumber(state.balance);
-  // we accept the server to be one block ahead/behind, but not more
-  const isServerConnected =
-    Math.abs(state.currentBlock - state.currentBlockWebServer) <= 1 &&
-    Math.abs(state.currentBlock - state.currentBlockSyncServer) <= 1 &&
-    Math.abs(state.currentBlockWebServer - state.currentBlockSyncServer) <= 1;
+const stateMap: OrderedMap<ReadyState, Function> = OrderedMap({
+  Loading: () => false,
+  'Client Not Connected': (state: State) => !state.isConnected,
+  'No Account Selected': (state: State) => !state.account,
+  'Server Not Connected': (state: State) => !state.isServerConnected,
+  'Unsupported Network': (state: State) => !isNetworkSupported(state.network),
+  'Insufficient Fund': (state: State) => new BigNumber(state.balance).lte(0),
+  Ready: () => true,
+});
 
-  if (
-    balance.gt(0) &&
-    isNetworkSupported(state.network) &&
-    state.account &&
-    state.isConnected &&
-    isServerConnected
-  ) {
-    return {
-      readyState: 'Ready',
-      isReady: true,
-      isServerConnected,
-    };
-  } else if (
-    isNetworkSupported(state.network) &&
-    state.account &&
-    state.isConnected &&
-    isServerConnected
-  ) {
-    return {
-      readyState: 'Insufficient Fund',
-      isReady: false,
-      isServerConnected,
-    };
-  } else if (state.account && state.isConnected && isServerConnected) {
-    return {
-      readyState: 'Unsupported Network',
-      isReady: false,
-      isServerConnected,
-    };
-  } else if (state.isConnected && isServerConnected) {
-    return {
-      readyState: 'No Account Selected',
-      isReady: false,
-      isServerConnected,
-    };
-  } else if (isServerConnected) {
-    return {
-      readyState: 'Client Not Connected',
-      isReady: false,
-      isServerConnected,
-    };
-  } else if (!isServerConnected) {
-    return {
-      readyState: 'Server Not Connected',
-      isReady: false,
-      isServerConnected,
-    };
-  }
+const getReadyState = (observedState: ObservedState): DerivedState => {
+  const derivedState: State = {
+    ...observedState,
+    // we accept the server to be one block ahead/behind, but not more
+    isServerConnected:
+      Math.abs(
+        observedState.currentBlock - observedState.currentBlockWebServer,
+      ) <= 1 &&
+        Math.abs(
+          observedState.currentBlock - observedState.currentBlockSyncServer,
+        ) <= 1 &&
+        Math.abs(
+          observedState.currentBlockWebServer -
+            observedState.currentBlockSyncServer,
+        ) <= 1,
+  };
+  const readyState = stateMap.findKey(value => value(derivedState));
 
   return {
-    readyState: 'Server Connected',
-    isReady: false,
-    isServerConnected,
+    readyState,
+    isServerConnected: derivedState.isServerConnected,
+    isReady: readyState === 'Ready',
   };
 };
 
