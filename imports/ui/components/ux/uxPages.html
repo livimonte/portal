@@ -183,14 +183,14 @@
 
 <!-- Insufficient Funds -->
 <template name="uxInsufficientFunds">
+  {{#if unregistered}}
   <div class="container">
     <div class="row">
       <div id="results" class="col-md-12 text-center error-message">
         <img src="/dist/img/insufficient_funds.png">
         <h2 class="about-title">Insufficient funds</h2>
         <p>In order to create a fund, you need to have some Kovan test ether in your wallet.</p>
-        <p>You can get verified with your email address to receive some Kovan ether.</p>
-        <div class="line-divider"></div>
+        <p>You can get verified with your email address to receive some Kovan ether in your wallet.</p>
         <form class="col s12 new-portfolio" id="email">
           <div class="row">
             <div class="col-md-12">
@@ -214,6 +214,17 @@
       <!--<a href="https://github.com/kovan-testnet/faucet" class="btn btn-def btn-light-blue" target="blank" rel="noopener">Get some k-ethers here</a>-->
     </div>
   </div>
+  {{else}}
+  <div class="container">
+    <div class="row">
+      <div id="results" class="col-md-12 text-center error-message">
+        <h2 class="about-title">Ongoing email verification</h2>
+        <p>Check your mailbox, you must have received a confirmation email. After confirmation, you will receive some Kovan
+          test ether on your Metamask to get started!</p>
+      </div>
+    </div>
+  </div>
+  {{/if}}
 </template>
 
 <!-- Ethereum Testnet -->

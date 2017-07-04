@@ -5,7 +5,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import Users from '/imports/api/users';
 
 import store from '/imports/startup/client/store';
-import { creators } from '/imports/redux/vault';
+import { creators } from '/imports/redux/web3';
 
 // Corresponding html file
 import './uxPages.html';
@@ -51,16 +51,14 @@ Template.uxInsufficientFunds.onCreated(() => {
 });
 
 Template.uxInsufficientFunds.helpers({
-  isRegistered: () => Template.instance().isRegistered.get(),
+  unregistered: () => !Template.instance().isRegistered.get(),
 });
-Template.uxInsufficientFunds.onRendered({});
 Template.uxInsufficientFunds.events({
   'submit form#email': (event, templateInstance) => {
     event.preventDefault();
-    console.log(Template.instance().isRegistered.get());
     const email = templateInstance.find('input#userEmail').value;
     const address = Session.get('selectedAccount');
     Meteor.call('users.add', { email, address });
-    store.dispatch(creators.register);
+    store.dispatch(creators.register());
   },
 });
