@@ -12,9 +12,8 @@ import {
 import web3 from '/imports/redux/web3';
 import user from '/imports/redux/user';
 import userMiddleware from '/imports/redux/middlewares/user';
-import Raven from './raven';
+import Raven from '/imports/startup/utils/raven';
 
-// http://redux.js.org/docs/api/createStore.html
 export default createStore(
   combineReducers({
     manageHoldings,

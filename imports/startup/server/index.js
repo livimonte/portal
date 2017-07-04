@@ -1,4 +1,4 @@
-import '/imports/startup/server/raven';
+import '/imports/startup/utils/raven';
 
 // Syncs all the collections according to the blockchain state
 import '/imports/startup/server/sync-collections';

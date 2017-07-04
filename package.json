@@ -19,7 +19,6 @@
   },
   "eslintConfig": {
     "env": {
-      "meteor": true,
       "browser": true,
       "node": true,
       "jest": true

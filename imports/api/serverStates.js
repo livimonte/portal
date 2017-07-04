@@ -17,7 +17,7 @@ ServerStates.watch = () => {
       networkMapping[await pify(web3.version.getNetwork)()] ||
       web3.version.getNetwork;
     const currentBlock = await pify(web3.eth.getBlockNumber)();
-    const disableSync = !!Meteor.settings.public.disableSync;
+    const disableSync = !!Meteor.settings.public.DISABLE_SYNC;
     const appId = process.env.APP_ID;
     const nodeEnv = process.env.NODE_ENV;
     const rootURL = process.env.ROOT_URL;

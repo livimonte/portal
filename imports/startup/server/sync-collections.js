@@ -9,7 +9,7 @@ import serverStates from '/imports/api/serverStates';
 
 // EXECUTION
 Meteor.startup(() => {
-  if (!Meteor.settings.public.disableSync) {
+  if (!Meteor.settings.public.DISABLE_SYNC) {
     Assets.remove({});
 
     Vaults.remove({});
