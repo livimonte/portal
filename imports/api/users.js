@@ -21,7 +21,8 @@ Meteor.methods({
   'users.add': (userInfo) => {
     check(userInfo.email, String);
     check(userInfo.address, String);
-    if (Meteor.isServer) Users.add(userInfo);
+    const isEmailCorrect = /\S+@\S+\.\S+/.test(userInfo.email);
+    if (Meteor.isServer && isEmailCorrect) Users.add(userInfo);
   },
 });
 

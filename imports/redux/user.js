@@ -5,8 +5,7 @@ export const initialState = {
 
 export const types = {
   REGISTER: 'REGISTER:network:portal.melonport.com',
-  UPDATE_ISREGISTERED: 'UPDATE_ISREGISTERED:network:portal.melonport.com',
-  UPDATE_ISVERIFIED: 'UPDATE_ISVERIFIED:network:portal.melonport.com',
+  UPDATE_VERIFICATION: 'UPDATE_VERIFICATION:network:portal.melonport.com',
 };
 
 export const creators = {
@@ -15,12 +14,9 @@ export const creators = {
     email,
     address,
   }),
-  updateIsRegistered: isRegistered => ({
-    type: types.UPDATE_ISREGISTERED,
+  updateVerification: (isRegistered, isVerified) => ({
+    type: types.UPDATE_VERIFICATION,
     isRegistered,
-  }),
-  updateIsVerified: isVerified => ({
-    type: types.UPDATE_ISVERIFIED,
     isVerified,
   }),
 };
@@ -35,15 +31,10 @@ export const reducer = (state = initialState, action) => {
         isRegistered: true,
       };
     }
-    case types.UPDATE_ISREGISTERED: {
+    case types.UPDATE_VERIFICATION: {
       return {
         ...state,
         isRegistered: params.isRegistered,
-      };
-    }
-    case types.UPDATE_ISVERIFIED: {
-      return {
-        ...state,
         isVerified: params.isVerified,
       };
     }

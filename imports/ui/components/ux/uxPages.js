@@ -54,7 +54,7 @@ Template.uxInsufficientFunds.helpers({
   unregistered: () => !Template.instance().isRegistered.get(),
 });
 Template.uxInsufficientFunds.events({
-  'submit form#email': (event, templateInstance) => {
+  'submit form.js-email': (event, templateInstance) => {
     event.preventDefault();
     const email = templateInstance.find('input#userEmail').value;
     const address = Session.get('selectedAccount');
