@@ -4,57 +4,31 @@
     <li>
       <p class="status">Status:</p>
       {{#if isErrorNetworkStatus}}
-          <p class="value">TX Error</p>
+      <p class="value">TX Error</p>
+      {{/if}} {{#if isMiningNetworkStatus}}
+      <p class="value">Sending</p>
+      {{/if}} {{#if isMinedNetworkStatus}}
+      <p class="value">Sent</p>
+      {{/if}} {{#if isReady}}
+      <p class="value">Connected</p>
+      {{else}}
+      <p class="value">{{getReadyState}}</p>
       {{/if}}
-
-      {{#if isMiningNetworkStatus}}
-          <p class="value">Sending</p>
-      {{/if}}
-
-      {{#if isMinedNetworkStatus}}
-          <p class="value">Sent</p>
-      {{/if}}
-
-  {{#if isInactiveNetworkStatus}}
-    {{#if isServerConnected}}
-      {{#if isClientConnected}}
-        {{#if selectedAccount}}
-          {{#if isKovanNetwork}}
-            {{#if sufficientFund}}
-              <p class="value">Connected</p>
-            {{else}} <!-- Client balance zero -->
-              <p class="value">Insufficient Funds</p>
-            {{/if}}
-          {{else}} <!-- Client not on Kovan -->
-            <p class="value">Connected to {{getNetwork}} nertwork. Please switch to Kovan testnet</p>
-          {{/if}}
-        {{else}} <!-- Client has no account selected -->
-          <p class="value">No account selected</p>
-        {{/if}}
-      {{else}} <!-- Client not connected -->
-        <p class="value">No connection</p>
-      {{/if}}
-    {{else}} <!-- Server not connected -->
-      <p class="value">Ethereum node down</p>
-    {{/if}}
-  {{/if}}
-
-
     </li>
 
     {{#if isMiningNetworkStatus}}
     <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-       <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+      <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
     </svg>
     {{else}}
 
     <li>
       {{#if isSynced}}
-        <p class="status">Latest Block:</p>
-        <p class="value">{{currentBlock}}</p>
+      <p class="status">Latest Block:</p>
+      <p class="value">{{currentBlock}}</p>
       {{else}}
-        <p class="status">Current Block:</p>
-        <p class="value">{{currentBlock}}</p>
+      <p class="status">Current Block:</p>
+      <p class="value">{{currentBlock}}</p>
       {{/if}}
     </li>
     <li>

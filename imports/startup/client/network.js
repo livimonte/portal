@@ -41,6 +41,11 @@ async function updateWeb3() {
       web3State.balance = balance ? balance.div(10 ** 18).toString() : null;
       web3State.currentBlock = await pify(web3.eth.getBlockNumber)();
       web3State.isSynced = !await pify(web3.eth.getSyncing)();
+    } else {
+      web3State.account = null;
+      web3State.network = null;
+      web3State.balance = '0';
+      web3State.currentBlock = 0;
     }
   } catch (e) {
     console.warn('Error with web3 connection.');
