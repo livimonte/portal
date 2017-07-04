@@ -1,8 +1,9 @@
 {
-  "name": "portal",
+  "name": "@melonproject/portal",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
-    "start": "meteor",
+    "start": "meteor --settings ./settings/dev.json",
     "lint": "eslint .",
     "flow": "flow",
     "jest": "jest",
@@ -18,7 +19,6 @@
   },
   "eslintConfig": {
     "env": {
-      "meteor": true,
       "browser": true,
       "node": true,
       "jest": true
@@ -39,10 +39,14 @@
     "babel-runtime": "^6.23.0",
     "bootstrap-switch": "^3.3.3",
     "cryptocompare": "^0.1.0",
+    "immutable": "^3.8.1",
     "jquery": "^3.1.1",
     "meteor-node-stubs": "~0.2.0",
     "moment": "^2.18.1",
     "pify": "^3.0.0",
+    "raven": "^2.1.0",
+    "raven-for-redux": "^1.0.0",
+    "raven-js": "^3.16.1",
     "redux": "^3.6.0",
     "select2": "^4.0.3",
     "truffle-contract": "^2.0.1",

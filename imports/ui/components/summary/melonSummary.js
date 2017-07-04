@@ -1,22 +1,38 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 // Components
 import '/imports/ui/components/ux/uxSpinner';
-// Corresponding html file
-import './melonSummary.html';
 // Collections
 import Vaults from '/imports/api/vaults';
+import store from '/imports/startup/client/store';
+// Corresponding html file
+import './melonSummary.html';
 
-Template.melonSummary.onCreated(() => {});
+Template.melonSummary.onCreated(() => {
+  const template = Template.instance();
+  template.readyState = new ReactiveVar();
+
+  store.subscribe(() => {
+    const currentState = store.getState().web3;
+    template.readyState.set(currentState.readyState);
+  });
+});
 
 Template.melonSummary.helpers({
+  isReady: () => Template.instance().readyState.get() === 'Ready',
+  getReadyState: () => Template.instance().readyState.get(),
   getRanking() {
     const numberOfVaults = Vaults.find().count();
     let coreAddress = FlowRouter.getParam('address');
 
     if (Vaults.find({ owner: Session.get('selectedAccount') }).count() !== 0) {
-      coreAddress = Vaults.findOne({ owner: Session.get('selectedAccount') }).address;
-      const sortedVaults = Vaults.find({}, { sort: { sharePrice: -1, createdAt: -1 } }).fetch();
+      coreAddress = Vaults.findOne({ owner: Session.get('selectedAccount') })
+        .address;
+      const sortedVaults = Vaults.find(
+        {},
+        { sort: { sharePrice: -1, createdAt: -1 } },
+      ).fetch();
       let ranking;
       for (let i = 0; i < sortedVaults.length; i++) {
         if (coreAddress == sortedVaults[i].address) {
@@ -25,9 +41,8 @@ Template.melonSummary.helpers({
         }
       }
       return `${ranking} out of ${numberOfVaults}`;
-    } else if (Vaults.find({ owner: Session.get('selectedAccount') }).count() == 0) {
-      return 'No ranking available.';
     }
+    return 'No ranking available.';
   },
 });
 

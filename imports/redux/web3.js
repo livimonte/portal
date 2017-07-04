@@ -10,29 +10,31 @@ export type Providers =
 export type Networks = "Rinkeby" | "Ropsten" | "Kovan" | "Main" | "Private";
 export type ReadyState =
   | "Loading"
-  | "Server Not Connected"
   | "Client Not Connected"
+  | "Server Not Connected"
   | "No Account Selected"
   | "Unsupported Network"
   | "Insufficient Fund"
   | "Ready";
 
-type ObservedState = {
+export type ObservedState = {
   isSynced: boolean,
   isConnected: boolean,
   currentBlock: number,
+  currentBlockWebServer: number,
+  currentBlockSyncServer: number,
+  // balance in ETH is stored as a string with precision
+  // '1.234' and not '1231'
   balance: string,
   network?: Networks,
   account?: string,
-  provider?: Providers,
-  // balance in ETH is stored as a string with precision
-  // '1.234' and not '1231'
-  isServerConnected?: boolean
+  provider?: Providers
 };
 
 export type DerivedState = {
   readyState: ReadyState,
-  isReady: boolean
+  isReady: boolean,
+  isServerConnected: boolean
 };
 
 export type State = ObservedState & DerivedState;
@@ -41,10 +43,13 @@ export const initialState: State = {
   isSynced: false,
   isConnected: false,
   currentBlock: 0,
+  currentBlockWebServer: 0,
+  currentBlockSyncServer: 0,
   readyState: 'Loading',
   isReady: false,
   balance: '0',
   gasLimit: '3500000',
+  isServerConnected: false,
 };
 
 export const types = {
@@ -52,7 +57,7 @@ export const types = {
 };
 
 export const creators = {
-  update: newState => ({
+  update: (newState: State) => ({
     type: types.UPDATE,
     ...newState,
   }),

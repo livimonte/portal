@@ -1,4 +1,4 @@
-// Load global components
+import '/imports/startup/utils/raven';
 import '/imports/ui/components/ux/uxPages';
 import '/imports/ui/components/summary/melonSummary';
 import '/imports/ui/components/summary/executiveSummary';
