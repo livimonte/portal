@@ -9,10 +9,8 @@ import {
   middleware as vaultMiddleware,
 } from '/imports/redux/vault';
 import web3 from '/imports/redux/web3';
-import {
-  default as user,
-  middleware as userMiddleware,
-} from '/imports/redux/user';
+import user from '/imports/redux/user';
+import userMiddleware from '/imports/redux/middlewares/user';
 
 // http://redux.js.org/docs/api/createStore.html
 export default createStore(

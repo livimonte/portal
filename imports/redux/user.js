@@ -1,12 +1,12 @@
-import { Meteor } from 'meteor/meteor';
-import Users from '/imports/api/users';
-
 export const initialState = {
   isRegistered: false,
+  isVerified: false,
 };
 
 export const types = {
   REGISTER: 'REGISTER:network:portal.melonport.com',
+  UPDATE_ISREGISTERED: 'UPDATE_ISREGISTERED:network:portal.melonport.com',
+  UPDATE_ISVERIFIED: 'UPDATE_ISVERIFIED:network:portal.melonport.com',
 };
 
 export const creators = {
@@ -14,6 +14,14 @@ export const creators = {
     type: types.REGISTER,
     email,
     address,
+  }),
+  updateIsRegistered: isRegistered => ({
+    type: types.UPDATE_ISREGISTERED,
+    isRegistered,
+  }),
+  updateIsVerified: isVerified => ({
+    type: types.UPDATE_ISVERIFIED,
+    isVerified,
   }),
 };
 
@@ -27,27 +35,21 @@ export const reducer = (state = initialState, action) => {
         isRegistered: true,
       };
     }
+    case types.UPDATE_ISREGISTERED: {
+      return {
+        ...state,
+        isRegistered: params.isRegistered,
+      };
+    }
+    case types.UPDATE_ISVERIFIED: {
+      return {
+        ...state,
+        isVerified: params.isVerified,
+      };
+    }
     default:
       return state;
   }
-};
-
-export const middleware = store => next => (action) => {
-  const { type, ...params } = action;
-
-  switch (type) {
-    case types.REGISTER: {
-      const email = params.email;
-      const address = params.address;
-      Meteor.call('users.add', {
-        email,
-        address,
-      });
-      break;
-    }
-    default:
-  }
-  return next(action);
 };
 
 export default reducer;
