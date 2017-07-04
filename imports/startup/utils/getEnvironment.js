@@ -7,8 +7,7 @@ if (!Meteor.settings.public.ENVIRONMENT) {
 }
 
 const getEnvironment = () =>
-  Meteor.settings.public.ENVIRONMENT || Meteor.isProduction
-    ? 'production'
-    : 'development';
+  Meteor.settings.public.ENVIRONMENT ||
+  (Meteor.isProduction ? 'production' : 'development');
 
 export default getEnvironment;

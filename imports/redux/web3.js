@@ -17,7 +17,7 @@ export type ReadyState =
   | "Insufficient Fund"
   | "Ready";
 
-type ObservedState = {
+export type ObservedState = {
   isSynced: boolean,
   isConnected: boolean,
   currentBlock: number,
