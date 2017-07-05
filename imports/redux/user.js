@@ -3,6 +3,7 @@ export const initialState = {
   isVerified: false,
   aumSort: -1,
   sharePriceSort: -1,
+  prioritySorting: 'sharePriceSort',
 };
 
 export const types = {
@@ -54,12 +55,14 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         aumSort: params.sortType,
+        prioritySorting: 'aumSort',
       };
     }
     case types.SORT_SHAREPRICE: {
       return {
         ...state,
         sharePriceSort: params.sortType,
+        prioritySorting: 'sharePriceSort',
       };
     }
     default:

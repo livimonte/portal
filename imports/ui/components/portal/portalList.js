@@ -15,10 +15,12 @@ Template.portalList.onCreated(() => {
   const template = Template.instance();
   template.aumSort = new ReactiveVar(-1);
   template.sharePriceSort = new ReactiveVar(-1);
+  template.prioritySorting = new ReactiveVar('sharePriceSort');
   store.subscribe(() => {
     const currentState = store.getState().user;
     template.aumSort.set(currentState.aumSort);
     template.sharePriceSort.set(currentState.sharePriceSort);
+    template.prioritySorting.set(currentState.prioritySorting);
   });
 });
 
@@ -26,10 +28,20 @@ Template.portalList.helpers({
   searchedVaults: () => {
     const aumSort = Template.instance().aumSort.get();
     const sharePriceSort = Template.instance().sharePriceSort.get();
-    console.log({ aumSort, sharePriceSort });
+    const prioritySorting = Template.instance().prioritySorting.get();
+    if (prioritySorting === 'sharePriceSort') {
+      return Vaults.find(
+        {
+          name: { $regex: `.*${Session.get('searchVaults')}.*`, $options: 'i' },
+        },
+        { sort: { sharePrice: sharePriceSort, nav: aumSort, createdAt: -1 } },
+      );
+    }
     return Vaults.find(
-      { name: { $regex: `.*${Session.get('searchVaults')}.*`, $options: 'i' } },
-      { sort: { sharePrice: sharePriceSort, nav: aumSort, createdAt: -1 } },
+      {
+        name: { $regex: `.*${Session.get('searchVaults')}.*`, $options: 'i' },
+      },
+      { sort: { nav: aumSort, sharePrice: sharePriceSort, createdAt: -1 } },
     );
   },
   getVaultLink: address =>
