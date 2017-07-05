@@ -25,6 +25,7 @@ Meteor.startup(() => {
     Trades.remove({});
     Trades.watch();
 
+    Transactions.remove({});
     Transactions.watch();
   }
 });
