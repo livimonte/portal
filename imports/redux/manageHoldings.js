@@ -65,15 +65,17 @@ export const reducer = (state = initialState, action) => {
   const { type, ...params } = action;
   switch (type) {
     case types.CHANGE_VOLUME: {
-      const volume = new BigNumber(params.volume || 0).gt(state.maxVolume)
+      const volume = new BigNumber(params.volume || 0).gt(state.maxVolume || 0)
         ? state.maxVolume
         : params.volume;
       return {
         ...state,
         volume,
         total: new BigNumber(volume || 0)
-          .times(state.averagePrice)
-          .toPrecision(getTokenPrecisionBySymbol(state.currentAssetPair.baseTokenSymbol)),
+          .times(state.averagePrice || 0)
+          .toPrecision(
+            getTokenPrecisionBySymbol(state.currentAssetPair.baseTokenSymbol),
+          ),
       };
     }
     case types.CHANGE_TOTAL: {
@@ -85,7 +87,9 @@ export const reducer = (state = initialState, action) => {
         total,
         volume: new BigNumber(total || 0)
           .div(state.averagePrice)
-          .toPrecision(getTokenPrecisionBySymbol(state.currentAssetPair.quoteTokenSymbol)),
+          .toPrecision(
+            getTokenPrecisionBySymbol(state.currentAssetPair.quoteTokenSymbol),
+          ),
       };
     }
     case types.SELECT_ASSET_PAIR: {
@@ -133,12 +137,24 @@ export const middleware = store => next => (action) => {
       );
       break;
     case types.SELECT_ORDER: {
-      const { baseTokenSymbol, quoteTokenSymbol } = currentState.currentAssetPair;
+      const {
+        baseTokenSymbol,
+        quoteTokenSymbol,
+      } = currentState.currentAssetPair;
       const selectedOrder = Orders.findOne({ id: params.selectedOrderId });
-      const theirOrderType = selectedOrder.sell.symbol === 'ETH-T' ? 'buy' : 'sell';
-      const ourOrderType = selectedOrder.sell.symbol === 'ETH-T' ? 'sell' : 'buy';
+      const theirOrderType = selectedOrder.sell.symbol === 'ETH-T'
+        ? 'buy'
+        : 'sell';
+      const ourOrderType = selectedOrder.sell.symbol === 'ETH-T'
+        ? 'sell'
+        : 'buy';
       const orders = Orders.find(
-        filterByAssetPair(baseTokenSymbol, quoteTokenSymbol, theirOrderType, true),
+        filterByAssetPair(
+          baseTokenSymbol,
+          quoteTokenSymbol,
+          theirOrderType,
+          true,
+        ),
       ).fetch();
       const matchedOrders = matchOrders(
         theirOrderType,
@@ -154,9 +170,15 @@ export const middleware = store => next => (action) => {
           store.dispatch(
             creators.loadOrder({
               theirOrderType,
-              volume: volume.toPrecision(getTokenPrecisionBySymbol(baseTokenSymbol)),
-              averagePrice: averagePrice.toPrecision(getTokenPrecisionBySymbol(quoteTokenSymbol)),
-              total: total.toPrecision(getTokenPrecisionBySymbol(baseTokenSymbol)),
+              volume: volume.toPrecision(
+                getTokenPrecisionBySymbol(baseTokenSymbol),
+              ),
+              averagePrice: averagePrice.toPrecision(
+                getTokenPrecisionBySymbol(quoteTokenSymbol),
+              ),
+              total: total.toPrecision(
+                getTokenPrecisionBySymbol(baseTokenSymbol),
+              ),
             }),
           ),
         0,

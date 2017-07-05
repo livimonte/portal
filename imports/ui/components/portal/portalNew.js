@@ -6,7 +6,7 @@ import VersionJson from '@melonproject/protocol/build/contracts/Version.json';
 // Smart Contracts
 import web3 from '/imports/lib/web3/client';
 import addressList from '/imports/melon/interface/addressList';
-
+import store from '/imports/startup/client/store';
 import './portalNew.html';
 
 const Version = contract(VersionJson);
@@ -45,10 +45,13 @@ Template.portalNew.events({
       alert('Please enter a portfolio name.');
       return;
     }
+
     // Description input parameters
     const PORTFOLIO_NAME = templateInstance.find('input#portfolio_name').value;
     const PORTFOLIO_SYMBOL = 'MLN-P';
     const PORTFOLIO_DECIMALS = 18;
+    const gasLimit = store.getState().web3.gasLimit;
+
     // Deploy
     const versionContract = Version.at(addressList.version);
     Session.set('NetworkStatus', {
@@ -57,6 +60,7 @@ Template.portalNew.events({
       isError: false,
       isMined: false,
     });
+
     versionContract
       .createVault(
         PORTFOLIO_NAME,
@@ -69,7 +73,7 @@ Template.portalNew.events({
         addressList.riskMgmt,
         addressList.managementFee,
         addressList.performanceFee,
-        { from: Session.get('selectedAccount') },
+        { from: Session.get('selectedAccount'), gas: gasLimit },
       )
       .then((result) => {
         let id;
@@ -79,7 +83,9 @@ Template.portalNew.events({
             console.log('Vault has been created');
             console.log(`Vault id: ${id}`);
             Session.set('isNew', true);
-            toastr.success('Fund successfully created! You can now invest in your fund!');
+            toastr.success(
+              'Fund successfully created! You can now invest in your fund!',
+            );
           }
         }
         return versionContract.getVault(id);
@@ -95,7 +101,9 @@ Template.portalNew.events({
         FlowRouter.go(`/fund/${address}`);
       })
       .catch((err) => {
-        toastr.error('Oops, an error has occurred. Please verify your fund informations.');
+        toastr.error(
+          'Oops, an error has occurred. Please verify your fund informations.',
+        );
         Session.set('NetworkStatus', {
           isInactive: false,
           isMining: false,

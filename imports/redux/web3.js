@@ -1,25 +1,55 @@
 // @flow
-type Providers = 'MetaMask' | 'Mist' | 'Parity' | 'LocalNode' | 'Unknown';
-type Networks = 'Rinkeby' | 'Ropsten' | 'Kovan' | 'Main' | 'Private';
+import getReadyState from './utils/getReadyState';
 
-type State = {
-  isConnected: boolean,
+export type Providers =
+  | "MetaMask"
+  | "Mist"
+  | "Parity"
+  | "LocalNode"
+  | "Unknown";
+export type Networks = "Rinkeby" | "Ropsten" | "Kovan" | "Main" | "Private";
+export type ReadyState =
+  | "Loading"
+  | "Client Not Connected"
+  | "Server Not Connected"
+  | "No Account Selected"
+  | "Unsupported Network"
+  | "Insufficient Fund"
+  | "Ready";
+
+export type ObservedState = {
   isSynced: boolean,
-  network?: Networks,
+  isConnected: boolean,
   currentBlock: number,
-  account?: string,
-  provider?: Providers,
+  currentBlockWebServer: number,
+  currentBlockSyncServer: number,
   // balance in ETH is stored as a string with precision
   // '1.234' and not '1231'
-  balance?: string,
-  isServerConnected: boolean,
+  balance: string,
+  network?: Networks,
+  account?: string,
+  provider?: Providers
 };
+
+export type DerivedState = {
+  readyState: ReadyState,
+  isReady: boolean,
+  isServerConnected: boolean
+};
+
+export type State = ObservedState & DerivedState;
 
 export const initialState: State = {
   isSynced: false,
   isConnected: false,
-  isServerConnected: null,
   currentBlock: 0,
+  currentBlockWebServer: 0,
+  currentBlockSyncServer: 0,
+  readyState: 'Loading',
+  isReady: false,
+  balance: '0',
+  gasLimit: '3500000',
+  isServerConnected: false,
 };
 
 export const types = {
@@ -27,7 +57,7 @@ export const types = {
 };
 
 export const creators = {
-  update: newState => ({
+  update: (newState: State) => ({
     type: types.UPDATE,
     ...newState,
   }),
@@ -38,11 +68,18 @@ export const reducer = (state: State = initialState, action: string) => {
 
   switch (type) {
     // simple state updaters
-    case types.UPDATE:
-      return {
+    case types.UPDATE: {
+      const newState = {
         ...state,
         ...params,
       };
+
+      return {
+        ...newState,
+        ...getReadyState(newState),
+      };
+    }
+
     default:
       return state;
   }

@@ -15,11 +15,11 @@ import '/imports/ui/pages/wallet';
 FlowRouter.route('/', {
   name: 'portal',
   action() {
-    BlazeLayout.render('layout_main', {
-      nav: 'layout_header',
+    BlazeLayout.render('layoutMain', {
+      nav: 'layoutHeader',
       header: 'uxIndexPortal',
       main: 'portal',
-      footer: 'layout_footer',
+      footer: 'layoutFooter',
     });
   },
 });
@@ -27,11 +27,25 @@ FlowRouter.route('/', {
 FlowRouter.route('/visit', {
   name: 'visit',
   action() {
-    BlazeLayout.render('layout_main', {
-      nav: 'layout_header',
+    BlazeLayout.render('layoutMain', {
+      nav: 'layoutHeader',
       header: 'uxIndexPortal',
       main: 'visit',
-      footer: 'layout_footer',
+      footer: 'layoutFooter',
+      visit: true,
+    });
+  },
+});
+
+FlowRouter.route('/visit/:address', {
+  name: 'visit',
+  action() {
+    BlazeLayout.render('layoutMain', {
+      nav: 'layoutHeader',
+      header: 'uxIndexPortal',
+      main: 'fund',
+      footer: 'layoutFooter',
+      visit: true,
     });
   },
 });
@@ -39,11 +53,11 @@ FlowRouter.route('/visit', {
 FlowRouter.route('/fund/:address', {
   name: 'fund',
   action() {
-    BlazeLayout.render('layout_main', {
-      nav: 'layout_header',
-      header: 'ux_portfolioOverview',
+    BlazeLayout.render('layoutMain', {
+      nav: 'layoutHeader',
+      header: 'uxPortfolioOverview',
       main: 'fund',
-      footer: 'layout_footer',
+      footer: 'layoutFooter',
     });
   },
 });
@@ -51,11 +65,11 @@ FlowRouter.route('/fund/:address', {
 FlowRouter.route('/manage/:address', {
   name: 'manage',
   action() {
-    BlazeLayout.render('layout_main', {
-      nav: 'layout_header',
-      header: 'ux_manageOverview',
+    BlazeLayout.render('layoutMain', {
+      nav: 'layoutHeader',
+      header: 'uxManageOverview',
       main: 'manage',
-      footer: 'layout_footer',
+      footer: 'layoutFooter',
     });
   },
 });
@@ -64,11 +78,11 @@ FlowRouter.route('/manage/:address', {
 FlowRouter.route('/account/:address', {
   name: 'account',
   action() {
-    BlazeLayout.render('layout_main', {
-      nav: 'layout_header',
-      header: 'ux_walletOverview',
+    BlazeLayout.render('layoutMain', {
+      nav: 'layoutHeader',
+      header: 'uxWalletOverview',
       main: 'wallet',
-      footer: 'layout_footer',
+      footer: 'layoutFooter',
     });
   },
 });

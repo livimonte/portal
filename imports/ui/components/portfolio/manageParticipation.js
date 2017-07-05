@@ -5,6 +5,7 @@ import { Session } from 'meteor/session';
 import { ReactiveVar } from 'meteor/reactive-var';
 import select2 from 'select2';
 import contract from 'truffle-contract';
+import BigNumber from 'bignumber.js';
 // Contracts
 import VaultJson from '@melonproject/protocol/build/contracts/Vault.json'; // Get Smart Contract JSON
 import EtherTokenJson from '@melonproject/protocol/build/contracts/EtherToken.json';
@@ -14,14 +15,28 @@ import addressList from '/imports/melon/interface/addressList';
 // Collections
 import Vaults from '/imports/api/vaults';
 
+import convertFromTokenPrecision from '/imports/melon/interface/helpers/convertFromTokenPrecision';
+
+import store from '/imports/startup/client/store';
+import { creators } from '/imports/redux/vault';
+
 import './manageParticipation.html';
 
 const Vault = contract(VaultJson); // Set Provider
 
 Template.manageParticipation.onCreated(() => {
   // TODO update vaults param
+  const template = Template.instance();
+  template.sharePrice = new ReactiveVar(0);
+  template.typeValue = new ReactiveVar(0);
   Meteor.subscribe('vaults');
-  Template.instance().typeValue = new ReactiveVar(0);
+  store.subscribe(() => {
+    const currentState = store.getState().vault;
+    template.sharePrice.set(
+      new BigNumber(currentState.sharePrice || 0).toString(),
+    );
+  });
+  store.dispatch(creators.requestCalculations(FlowRouter.getParam('address')));
 });
 
 Template.manageParticipation.helpers({
@@ -37,6 +52,10 @@ Template.manageParticipation.helpers({
       if (!doc.sharePrice) return 1;
       return web3.fromWei(doc.sharePrice, 'ether');
     }
+  },
+  getSharePrice() {
+    const template = Template.instance();
+    return template.sharePrice.get();
   },
   selectedTypeName() {
     switch (Template.instance().typeValue.get()) {
@@ -155,6 +174,11 @@ Template.manageParticipation.events({
             vaultContract.createShares(baseUnitVolume, { from: managerAddress }),
           )
           .then((result) => {
+            store.dispatch(
+              creators.requestParticipation(vaultAddress, managerAddress),
+            );
+            store.dispatch(creators.requestCalculations(vaultAddress));
+
             Session.set('NetworkStatus', {
               isInactive: false,
               isMining: false,
@@ -189,6 +213,10 @@ Template.manageParticipation.events({
         vaultContract
           .annihilateShares(baseUnitVolume, weiTotal, { from: managerAddress })
           .then((result) => {
+            store.dispatch(
+              creators.requestParticipation(vaultAddress, managerAddress),
+            );
+            store.dispatch(creators.requestCalculations(vaultAddress));
             Session.set('NetworkStatus', {
               isInactive: false,
               isMining: false,
