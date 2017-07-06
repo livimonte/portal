@@ -7,6 +7,10 @@ import { bootstrapSwitch } from 'bootstrap-switch';
 import Vaults from '/imports/api/vaults';
 import Assets from '/imports/api/assets';
 
+import store from '/imports/startup/client/store';
+
+import { ReactiveVar } from 'meteor/reactive-var';
+
 // Specs
 import specs from '/imports/melon/interface/helpers/specs';
 import convertFromTokenPrecision from '/imports/melon/interface/helpers/convertFromTokenPrecision';
@@ -57,6 +61,12 @@ Template.manageOverview.onCreated(() => {
   Meteor.subscribe('vaults');
   Meteor.call('assets.sync', FlowRouter.getParam('address'));
   Meteor.subscribe('assets', FlowRouter.getParam('address'));
+  const template = Template.instance();
+  template.currentAssetPair = new ReactiveVar();
+  store.subscribe(() => {
+    const currentState = store.getState().manageHoldings;
+    template.currentAssetPair.set(currentState.currentAssetPair);
+  });
 
   // TODO send command to server to update current vaultContract
 });
@@ -64,8 +74,8 @@ Template.manageOverview.onCreated(() => {
 Template.manageOverview.helpers({
   assetPairs,
   currentAssetPair: () => Session.get('currentAssetPair'),
-  baseTokenSymbol: () => (Session.get('currentAssetPair') || '---/---').split('/')[0],
-  quoteTokenSymbol: () => (Session.get('currentAssetPair') || '---/---').split('/')[1],
+  baseTokenSymbol: () => Template.instance().currentAssetPair.get().baseTokenSymbol,
+  quoteTokenSymbol: () => Template.instance().currentAssetPair.get().quoteTokenSymbol,
   selected: assetPair => (assetPair === Session.get('currentAssetPair') ? 'selected' : ''),
   isFromPortfolio: () => (Session.get('fromPortfolio') ? 'checked' : ''),
   getPortfolioDoc() {
