@@ -5,8 +5,13 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { bootstrapSwitch } from 'bootstrap-switch';
 // Collections
 import Vaults from '/imports/api/vaults';
+import Assets from '/imports/api/assets';
+
 // Specs
 import specs from '/imports/melon/interface/helpers/specs';
+import convertFromTokenPrecision from '/imports/melon/interface/helpers/convertFromTokenPrecision';
+import { getTokenAddress } from '/imports/melon/interface/helpers/specs';
+
 // Corresponding html file
 import './manageOverview.html';
 
@@ -20,7 +25,7 @@ const assetPairs = [...Array(numberOfQuoteTokens * numberOfBaseTokens).keys()]
       '/',
       specs.getQuoteTokens()[index % numberOfQuoteTokens],
     ].join(''),
-  )
+)
   .sort();
 
 FlowRouter.triggers.enter(
@@ -50,12 +55,18 @@ Tracker.autorun(() => {
 
 Template.manageOverview.onCreated(() => {
   Meteor.subscribe('vaults');
+  Meteor.call('assets.sync', FlowRouter.getParam('address')); // Upsert Assets Collection
+  // Meteor.call('vaults.syncVaultById', doc.id);
+  Meteor.subscribe('assets', FlowRouter.getParam('address'));
+
   // TODO send command to server to update current vaultContract
 });
 
 Template.manageOverview.helpers({
   assetPairs,
-  currentAssetPair: Session.get('currentAssetPair'),
+  currentAssetPair: () => Session.get('currentAssetPair'),
+  baseTokenSymbol: () => (Session.get('currentAssetPair') || '---/---').split('/')[0],
+  quoteTokenSymbol: () => (Session.get('currentAssetPair') || '---/---').split('/')[1],
   selected: assetPair => (assetPair === Session.get('currentAssetPair') ? 'selected' : ''),
   isFromPortfolio: () => (Session.get('fromPortfolio') ? 'checked' : ''),
   getPortfolioDoc() {
@@ -66,6 +77,12 @@ Template.manageOverview.helpers({
   getStatus() {
     if (Session.get('fromPortfolio')) return 'Manage fund';
     return 'Manage personal wallet';
+  },
+  getAssetHoldings(symbol) {
+    const assetHolderAddress = FlowRouter.getParam('address');
+    const tokenAddress = getTokenAddress(symbol);
+    const asset = Assets.findOne({ holder: assetHolderAddress, address: tokenAddress });
+    if (asset) return convertFromTokenPrecision(asset.holdings, asset.precision);
   },
 });
 
