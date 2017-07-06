@@ -41,7 +41,7 @@ const assetPairs = [...Array(numberOfQuoteTokens * numberOfBaseTokens).keys()]
       '/',
       specs.getQuoteTokens()[index % numberOfQuoteTokens],
     ].join(''),
-  )
+)
   .sort();
 
 Template.manageHoldings.onCreated(() => {
@@ -144,7 +144,7 @@ Template.manageHoldings.events({
   },
   'click .js-placeorder': async (event, templateInstance) => {
     event.preventDefault();
-    if(Template.instance().state.get('selectedOrderId') !== undefined) {
+    if (Template.instance().state.get('selectedOrderId') !== undefined) {
       window.scrollTo(0, 0);
       Session.set('NetworkStatus', {
         isInactive: false,
@@ -193,6 +193,8 @@ Template.manageHoldings.events({
           isError: false,
           isMined: true,
         });
+        Meteor.call('assets.sync', FlowRouter.getParam('address'));
+
         toastr.success('Order successfully executed!');
       } catch (e) {
         console.error(e);

@@ -55,8 +55,7 @@ Tracker.autorun(() => {
 
 Template.manageOverview.onCreated(() => {
   Meteor.subscribe('vaults');
-  Meteor.call('assets.sync', FlowRouter.getParam('address')); // Upsert Assets Collection
-  // Meteor.call('vaults.syncVaultById', doc.id);
+  Meteor.call('assets.sync', FlowRouter.getParam('address'));
   Meteor.subscribe('assets', FlowRouter.getParam('address'));
 
   // TODO send command to server to update current vaultContract
