@@ -24,19 +24,19 @@ Template.uxIndexPortal.events({
   },
 });
 
-Template.uxIndexGraph.onCreated(() => {});
+Template.uxIndexGraph.onCreated(() => { });
 
 Template.uxIndexGraph.helpers({});
 
-Template.uxIndexGraph.onRendered(() => {});
+Template.uxIndexGraph.onRendered(() => { });
 
 Template.uxIndexGraph.events({});
 
-Template.uxServerConnection.onCreated(() => {});
+Template.uxServerConnection.onCreated(() => { });
 
 Template.uxServerConnection.helpers({});
 
-Template.uxServerConnection.onRendered(() => {});
+Template.uxServerConnection.onRendered(() => { });
 
 Template.uxServerConnection.events({});
 
@@ -48,6 +48,9 @@ Template.uxInsufficientFunds.onCreated(() => {
     const currentState = store.getState().user;
     template.isRegistered.set(currentState.isRegistered);
   });
+  // grecaptcha.render('recaptcha', {
+  //   sitekey: '6Lf0gygUAAAAALaIMuKJliBrtuZWQlD6QBr-m80b',
+  // });
 });
 
 Template.uxInsufficientFunds.helpers({
@@ -56,8 +59,54 @@ Template.uxInsufficientFunds.helpers({
 Template.uxInsufficientFunds.events({
   'submit form.js-email': (event, templateInstance) => {
     event.preventDefault();
-    const email = templateInstance.find('input#userEmail').value;
-    const address = Session.get('selectedAccount');
-    store.dispatch(creators.register(email, address));
+    const captchaData = grecaptcha.getResponse();
+    const userData = { email: templateInstance.find('input#userEmail').value, address: Session.get('selectedAccount') };
+
+    // grecaptcha.render('recaptcha', {
+    //   sitekey: '6Lf0gygUAAAAALaIMuKJliBrtuZWQlD6QBr-m80b',
+    // });
+    // if (grecaptcha.getResponse() !== '') {
+    //   alert("You can't proceed!");
+    // }
+    // } else {
+    //   alert('Thank you');
+    // }
+    // const email = templateInstance.find('input#userEmail').value;
+    // const address = Session.get('selectedAccount');
+    // store.dispatch(creators.register(email, address));
+    Meteor.call('users.add', userData, captchaData, function (error, result) {
+      // reset the captcha
+      grecaptcha.reset();
+
+      if (error) {
+        console.log(`There was an error: ${error.reason}`);
+      } else {
+        console.log('Success!');
+      }
+    });
   },
 });
+
+// Template.myTemplate.events({
+//     'submit form': function(e) {
+//         e.preventDefault();
+
+//         var formData = {
+//             //get the data from your form fields
+//         };
+
+//         //get the captcha data
+//         var captchaData = grecaptcha.getResponse();
+
+//         Meteor.call('formSubmissionMethod', formData, captchaData, function(error, result) {
+//             // reset the captcha
+//             grecaptcha.reset();
+
+//             if (error) {
+//                 console.log('There was an error: ' + error.reason);
+//             } else {
+//                 console.log('Success!');
+//             }
+//         });
+//     }
+// });

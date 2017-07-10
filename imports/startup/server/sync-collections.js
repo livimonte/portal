@@ -10,6 +10,10 @@ import serverStates from '/imports/api/serverStates';
 Meteor.startup(() => {
   serverStates.watch();
 
+  reCAPTCHA.config({
+    privatekey: '6Lf0gygUAAAAAGnUg8xkjRAdWKtA80ccwoB2cOYh',
+  });
+
   if (!Meteor.settings.public.DISABLE_SYNC) {
     Assets.remove({});
 
@@ -24,4 +28,8 @@ Meteor.startup(() => {
     Trades.remove({});
     Trades.watch();
   }
+});
+Meteor.onConnection((connection) => {
+  const clientIp = connection.clientAddress;
+  console.log(clientIp);
 });

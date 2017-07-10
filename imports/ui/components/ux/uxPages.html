@@ -191,7 +191,7 @@
         <h2 class="about-title">Insufficient funds</h2>
         <p>In order to create a fund, you need to have some Kovan test ether in your wallet.</p>
         <p>You can get verified with your email address to receive some Kovan ether in your wallet.</p>
-        <form class="col s12 new-portfolio js-email">
+        <form action="?" method="POST" class="col s12 new-portfolio js-email">
           <div class="row">
             <div class="col-md-12">
               <div class="setup-form">
@@ -205,6 +205,8 @@
           </div>
           <div class="row">
             <div class="col-md-12 btn-portfolio text-left">
+              {{> reCAPTCHA}}
+              <!--<div id="recaptcha" class="g-recaptcha" data-sitekey="6Lf0gygUAAAAALaIMuKJliBrtuZWQlD6QBr-m80b" render="explicit"></div>-->
               <button type="submit" class="btn btn-light-blue">Get verified</button>
             </div>
           </div>

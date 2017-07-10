@@ -40,14 +40,14 @@ const setIntradayChange = (referenceCurrency) => {
     .generateAvg('MLN', CCREFERENCECURRENCY, CCMARKET)
     .then(data =>
       Session.set('mlnChange24h', invertNumber(data.CHANGEPCT24HOUR).toFixed(PRECISION)),
-    )
+  )
     .catch(console.error);
 
   cc
     .generateAvg('REP', CCREFERENCECURRENCY, CCMARKET)
     .then(data =>
       Session.set('repChange24h', invertNumber(data.CHANGEPCT24HOUR).toFixed(PRECISION)),
-    )
+  )
     .catch(console.error);
 };
 
@@ -59,6 +59,10 @@ Meteor.startup(() => {
     isMining: false,
     isError: false,
     isMined: false,
+  });
+  reCAPTCHA.config({
+    publickey: '6Lf0gygUAAAAALaIMuKJliBrtuZWQlD6QBr-m80b',
+    // hl: 'ja' // optional display language
   });
 
   // TODO handle case where CCREFERENCECURRENCY !== 'ETH'
