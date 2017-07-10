@@ -26,20 +26,21 @@ Meteor.methods({
   //   const isEmailCorrect = /\S+@\S+\.\S+/.test(userInfo.email);
   //   if (Meteor.isServer && isEmailCorrect) Users.add(userInfo);
   // },
-  'users.add': (formData, captchaData) => {
-    console.log('this.connection.clientAddress ', this.connection.clientAddress);
-    const verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
-    if (!verifyCaptchaResponse.success) {
-      console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
-      throw new Meteor.Error(422, `reCAPTCHA Failed: ${verifyCaptchaResponse.error}`);
-    } else {
-      console.log('reCAPTCHA verification passed!');
-      check(formData.email, String);
-      check(formData.address, String);
-      const isEmailCorrect = /\S+@\S+\.\S+/.test(formData.email);
-      if (Meteor.isServer && isEmailCorrect) Users.add(formData);
+  'users.add'(formData, captchaData) {
+    check(formData.email, String);
+    check(formData.address, String);
+    if (Meteor.isServer) {
+      const verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
+      if (!verifyCaptchaResponse.success) {
+        console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
+        throw new Meteor.Error(422, `reCAPTCHA Failed: ${verifyCaptchaResponse.error}`);
+      } else {
+        console.log('reCAPTCHA verification passed!');
+        const isEmailCorrect = /\S+@\S+\.\S+/.test(formData.email);
+        if (Meteor.isServer && isEmailCorrect) Users.add(formData);
+      }
+      return true;
     }
-    return true;
   },
 });
 
