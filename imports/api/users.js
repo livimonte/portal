@@ -7,13 +7,14 @@ if (Meteor.isServer) {
   Meteor.publish('users', () => Users.find());
 }
 
+
 Users.add = (userInfo) => {
   const email = userInfo.email;
   const address = userInfo.address;
   Users.insert({
     email,
     address,
-    verified: false,
+    isFunded: false,
   });
 };
 

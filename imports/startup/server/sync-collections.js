@@ -31,5 +31,5 @@ Meteor.startup(() => {
 });
 Meteor.onConnection((connection) => {
   const clientIp = connection.clientAddress;
-  console.log(clientIp);
+  console.log('-----------CLIENT IP -------------- ', clientIp);
 });

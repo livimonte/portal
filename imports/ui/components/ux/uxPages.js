@@ -48,9 +48,6 @@ Template.uxInsufficientFunds.onCreated(() => {
     const currentState = store.getState().user;
     template.isRegistered.set(currentState.isRegistered);
   });
-  // grecaptcha.render('recaptcha', {
-  //   sitekey: '6Lf0gygUAAAAALaIMuKJliBrtuZWQlD6QBr-m80b',
-  // });
 });
 
 Template.uxInsufficientFunds.helpers({
@@ -60,53 +57,20 @@ Template.uxInsufficientFunds.events({
   'submit form.js-email': (event, templateInstance) => {
     event.preventDefault();
     const captchaData = grecaptcha.getResponse();
-    const userData = { email: templateInstance.find('input#userEmail').value, address: Session.get('selectedAccount') };
+    const email = templateInstance.find('input#userEmail').value;
+    const address = Session.get('selectedAccount');
+    const userData = { email, address };
 
-    // grecaptcha.render('recaptcha', {
-    //   sitekey: '6Lf0gygUAAAAALaIMuKJliBrtuZWQlD6QBr-m80b',
-    // });
-    // if (grecaptcha.getResponse() !== '') {
-    //   alert("You can't proceed!");
-    // }
-    // } else {
-    //   alert('Thank you');
-    // }
-    // const email = templateInstance.find('input#userEmail').value;
-    // const address = Session.get('selectedAccount');
-    // store.dispatch(creators.register(email, address));
     Meteor.call('users.add', userData, captchaData, function (error, result) {
-      // reset the captcha
       grecaptcha.reset();
 
       if (error) {
         console.log(`There was an error: ${error.reason}`);
       } else {
         console.log('Success!');
+        store.dispatch(creators.register(email, address));
       }
     });
   },
 });
 
-// Template.myTemplate.events({
-//     'submit form': function(e) {
-//         e.preventDefault();
-
-//         var formData = {
-//             //get the data from your form fields
-//         };
-
-//         //get the captcha data
-//         var captchaData = grecaptcha.getResponse();
-
-//         Meteor.call('formSubmissionMethod', formData, captchaData, function(error, result) {
-//             // reset the captcha
-//             grecaptcha.reset();
-
-//             if (error) {
-//                 console.log('There was an error: ' + error.reason);
-//             } else {
-//                 console.log('Success!');
-//             }
-//         });
-//     }
-// });
