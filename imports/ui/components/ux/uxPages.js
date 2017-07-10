@@ -60,7 +60,6 @@ Template.uxInsufficientFunds.events({
     const email = templateInstance.find('input#userEmail').value;
     const address = Session.get('selectedAccount');
     const userData = { email, address };
-
     Meteor.call('users.add', userData, captchaData, function (error, result) {
       grecaptcha.reset();
 
@@ -68,7 +67,7 @@ Template.uxInsufficientFunds.events({
         console.log(`There was an error: ${error.reason}`);
       } else {
         console.log('Success!');
-        store.dispatch(creators.register(email, address));
+        // store.dispatch(creators.register(email, address));
       }
     });
   },
