@@ -42,16 +42,9 @@ Template.uxServerConnection.events({});
 
 Template.uxInsufficientFunds.onCreated(() => {
   Meteor.subscribe('users');
-  const template = Template.instance();
-  template.isRegistered = new ReactiveVar(false);
-  store.subscribe(() => {
-    const currentState = store.getState().user;
-    template.isRegistered.set(currentState.isRegistered);
-  });
 });
 
 Template.uxInsufficientFunds.helpers({
-  // unregistered: () => !Template.instance().isRegistered.get(),
   unregistered: () => !Users.findOne({ address: Session.get('selectedAccount') }),
 });
 Template.uxInsufficientFunds.events({

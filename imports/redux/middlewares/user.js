@@ -28,23 +28,6 @@ const userMiddleware = store => next => (action) => {
       );
       break;
     }
-    case web3Types.UPDATE: {
-      const currentAccount = currentState.web3.account;
-      const updatedAccount = action.account;
-      if (currentAccount !== updatedAccount) {
-        const user = Users.findOne({ address: updatedAccount });
-        if (user) {
-          if (user.verified) {
-            store.dispatch(creators.updateVerification(true, true));
-          } else {
-            store.dispatch(creators.updateVerification(true, false));
-          }
-        } else {
-          store.dispatch(creators.updateVerification(false, false));
-        }
-      }
-      break;
-    }
     default:
   }
   return next(action);

@@ -25,7 +25,6 @@ Meteor.methods({
     check(userData.address, String);
     check(captchaData, String);
     if (Meteor.isServer) {
-      const clientAddress = this.connection.clientAddress;
       const verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
       if (!verifyCaptchaResponse.success) {
         console.log('reCAPTCHA check failed!', verifyCaptchaResponse);

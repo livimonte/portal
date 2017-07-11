@@ -1,6 +1,5 @@
 export const initialState = {
   isRegistered: false,
-  isVerified: false,
   aumSort: -1,
   sharePriceSort: -1,
   prioritySorting: 'sharePriceSort',
@@ -8,7 +7,6 @@ export const initialState = {
 
 export const types = {
   REGISTER: 'REGISTER:network:portal.melonport.com',
-  UPDATE_VERIFICATION: 'UPDATE_VERIFICATION:network:portal.melonport.com',
   SORT_AUM: 'SORT_AUM:network:portal.melonport.com',
   SORT_SHAREPRICE: 'SORT_SHAREPRICE:network:portal.melonport.com',
 };
@@ -18,11 +16,6 @@ export const creators = {
     type: types.REGISTER,
     userData,
     captchaData,
-  }),
-  updateVerification: (isRegistered, isVerified) => ({
-    type: types.UPDATE_VERIFICATION,
-    isRegistered,
-    isVerified,
   }),
   sortAUM: sortType => ({
     type: types.SORT_AUM,
@@ -42,13 +35,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isRegistered: true,
-      };
-    }
-    case types.UPDATE_VERIFICATION: {
-      return {
-        ...state,
-        isRegistered: params.isRegistered,
-        isVerified: params.isVerified,
       };
     }
     case types.SORT_AUM: {
