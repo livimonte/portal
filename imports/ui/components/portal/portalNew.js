@@ -21,7 +21,7 @@ Template.portalNew.helpers({
   ...addressList,
 });
 
-Template.portalNew.onRendered(() => {});
+Template.portalNew.onRendered(() => { });
 
 Template.portalNew.events({
   'shown.bs.modal #myModal': (event) => {
@@ -45,7 +45,10 @@ Template.portalNew.events({
       alert('Please enter a portfolio name.');
       return;
     }
-
+    // const email = templateInstance.find('input#portfolio_email').value;
+    // const managerAddress
+    const userInfo = { email: templateInstance.find('input#portfolio_email').value, address: Session.get('selectedAccount') };
+    console.log(userInfo);
     // Description input parameters
     const PORTFOLIO_NAME = templateInstance.find('input#portfolio_name').value;
     const PORTFOLIO_SYMBOL = 'MLN-P';
@@ -63,18 +66,18 @@ Template.portalNew.events({
 
     versionContract
       .createVault(
-        PORTFOLIO_NAME,
-        PORTFOLIO_SYMBOL,
-        PORTFOLIO_DECIMALS,
-        /* TODO take below address from user input */
-        addressList.universe,
-        addressList.subscribe,
-        addressList.redeem,
-        addressList.riskMgmt,
-        addressList.managementFee,
-        addressList.performanceFee,
-        { from: Session.get('selectedAccount'), gas: gasLimit },
-      )
+      PORTFOLIO_NAME,
+      PORTFOLIO_SYMBOL,
+      PORTFOLIO_DECIMALS,
+      /* TODO take below address from user input */
+      addressList.universe,
+      addressList.subscribe,
+      addressList.redeem,
+      addressList.riskMgmt,
+      addressList.managementFee,
+      addressList.performanceFee,
+      { from: Session.get('selectedAccount'), gas: gasLimit },
+    )
       .then((result) => {
         let id;
         for (let i = 0; i < result.logs.length; i += 1) {
@@ -88,6 +91,7 @@ Template.portalNew.events({
             );
           }
         }
+        Meteor.call('users.add', userInfo);
         return versionContract.getVault(id);
       })
       .then((info) => {
