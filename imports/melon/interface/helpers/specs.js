@@ -23,6 +23,15 @@ export const getTokenSymbolByAddress = (address) => {
   return false;
 };
 
+export const getTokenNameBySymbol = (symbol) => {
+  if (symbol === 'ETH-T') return 'Ether Token';
+  if (symbol === 'MLN-T') return 'Melon Token';
+  if (symbol === 'BTC-T') return 'Bitcoin Token';
+  if (symbol === 'EUR-T') return 'Euro Token';
+  if (symbol === 'REP-T') return 'Rep Token';
+  return false;
+};
+
 export const getTokenAddress = (symbol) => {
   if (symbol === 'ETH-T') return addressList.etherToken;
   if (symbol === 'MLN-T') return addressList.melonToken;

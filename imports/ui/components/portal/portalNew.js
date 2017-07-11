@@ -48,7 +48,6 @@ Template.portalNew.events({
     // const email = templateInstance.find('input#portfolio_email').value;
     // const managerAddress
     const userInfo = { email: templateInstance.find('input#portfolio_email').value, address: Session.get('selectedAccount') };
-    console.log(userInfo);
     // Description input parameters
     const PORTFOLIO_NAME = templateInstance.find('input#portfolio_name').value;
     const PORTFOLIO_SYMBOL = 'MLN-P';

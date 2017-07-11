@@ -14,7 +14,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 // Specs
 import specs from '/imports/melon/interface/helpers/specs';
 import convertFromTokenPrecision from '/imports/melon/interface/helpers/convertFromTokenPrecision';
-import { getTokenAddress } from '/imports/melon/interface/helpers/specs';
+import { getTokenAddress, getTokenNameBySymbol } from '/imports/melon/interface/helpers/specs';
 
 // Corresponding html file
 import './manageOverview.html';
@@ -76,6 +76,8 @@ Template.manageOverview.helpers({
   currentAssetPair: () => Session.get('currentAssetPair'),
   baseTokenSymbol: () => Template.instance().currentAssetPair.get().baseTokenSymbol,
   quoteTokenSymbol: () => Template.instance().currentAssetPair.get().quoteTokenSymbol,
+  baseTokenName: () => getTokenNameBySymbol(Template.instance().currentAssetPair.get().baseTokenSymbol),
+  quoteTokenName: () => getTokenNameBySymbol(Template.instance().currentAssetPair.get().quoteTokenSymbol),
   selected: assetPair => (assetPair === Session.get('currentAssetPair') ? 'selected' : ''),
   isFromPortfolio: () => (Session.get('fromPortfolio') ? 'checked' : ''),
   getPortfolioDoc() {
