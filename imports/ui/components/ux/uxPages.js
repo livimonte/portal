@@ -51,7 +51,8 @@ Template.uxInsufficientFunds.onCreated(() => {
 });
 
 Template.uxInsufficientFunds.helpers({
-  unregistered: () => !Template.instance().isRegistered.get(),
+  // unregistered: () => !Template.instance().isRegistered.get(),
+  unregistered: () => !Users.findOne({ address: Session.get('selectedAccount') }),
 });
 Template.uxInsufficientFunds.events({
   'submit form.js-email': (event, templateInstance) => {
