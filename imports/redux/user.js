@@ -14,10 +14,10 @@ export const types = {
 };
 
 export const creators = {
-  register: (email, address) => ({
+  register: (userData, captchaData) => ({
     type: types.REGISTER,
-    email,
-    address,
+    userData,
+    captchaData,
   }),
   updateVerification: (isRegistered, isVerified) => ({
     type: types.UPDATE_VERIFICATION,

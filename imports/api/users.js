@@ -20,27 +20,20 @@ Users.add = (userInfo) => {
 
 
 Meteor.methods({
-  // 'users.add': (userInfo) => {
-  //   check(userInfo.email, String);
-  //   check(userInfo.address, String);
-  //   const isEmailCorrect = /\S+@\S+\.\S+/.test(userInfo.email);
-  //   if (Meteor.isServer && isEmailCorrect) Users.add(userInfo);
-  // },
-  'users.add'(formData, captchaData) {
-    check(formData.email, String);
-    check(formData.address, String);
+  'users.add'(userData, captchaData) {
+    check(userData.email, String);
+    check(userData.address, String);
+    check(captchaData, String);
     if (Meteor.isServer) {
       const clientAddress = this.connection.clientAddress;
-      console.log({ clientAddress, captchaData });
       const verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
-      console.log('--------- ', verifyCaptchaResponse);
       if (!verifyCaptchaResponse.success) {
         console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
         throw new Meteor.Error(422, `reCAPTCHA Failed: ${verifyCaptchaResponse.error}`);
       } else {
         console.log('reCAPTCHA verification passed!');
-        const isEmailCorrect = /\S+@\S+\.\S+/.test(formData.email);
-        if (Meteor.isServer && isEmailCorrect) Users.add(formData);
+        const isEmailCorrect = /\S+@\S+\.\S+/.test(userData.email);
+        if (Meteor.isServer && isEmailCorrect) Users.add(userData);
       }
       return true;
     }

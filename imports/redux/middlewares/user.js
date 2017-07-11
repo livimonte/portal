@@ -10,12 +10,22 @@ const userMiddleware = store => next => (action) => {
 
   switch (type) {
     case userTypes.REGISTER: {
-      const email = params.email;
-      const address = params.address;
-      Meteor.call('users.add', {
-        email,
-        address,
-      });
+      const userData = params.userData;
+      const captchaData = params.captchaData;
+
+      Meteor.call('users.add',
+        userData,
+        captchaData,
+        function (error, result) {
+          grecaptcha.reset();
+
+          if (error) {
+            console.log(`There was an error: ${error.reason}`);
+          } else {
+            console.log('Success!');
+          }
+        },
+      );
       break;
     }
     case web3Types.UPDATE: {
