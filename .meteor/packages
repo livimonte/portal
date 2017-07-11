@@ -40,3 +40,4 @@ flawless:meteor-toastr
 dynamic-import@0.1.0
 mdg:meteor-apm-agent
 altapp:recaptcha
+ejson

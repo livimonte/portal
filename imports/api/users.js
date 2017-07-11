@@ -30,7 +30,10 @@ Meteor.methods({
     check(formData.email, String);
     check(formData.address, String);
     if (Meteor.isServer) {
+      const clientAddress = this.connection.clientAddress;
+      console.log({ clientAddress, captchaData });
       const verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
+      console.log('--------- ', verifyCaptchaResponse);
       if (!verifyCaptchaResponse.success) {
         console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
         throw new Meteor.Error(422, `reCAPTCHA Failed: ${verifyCaptchaResponse.error}`);
@@ -45,3 +48,4 @@ Meteor.methods({
 });
 
 export default Users;
+

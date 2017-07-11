@@ -30,7 +30,3 @@ Meteor.startup(() => {
     Trades.watch();
   }
 });
-Meteor.onConnection((connection) => {
-  const clientIp = connection.clientAddress;
-  console.log('-----------CLIENT IP -------------- ', clientIp);
-});
