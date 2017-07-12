@@ -183,57 +183,31 @@
 
 <!-- Insufficient Funds -->
 <template name="uxInsufficientFunds">
-  {{#if unregistered}}
   <div class="container">
     <div class="row">
       <div id="results" class="col-md-12 text-center error-message">
         <img src="/dist/img/insufficient_funds.png">
         <h2 class="about-title">Insufficient funds</h2>
         <p>In order to create a fund, you need to have some Kovan test ether in your wallet.</p>
-        <p>You can get verified with your email address to receive some Kovan ether in your wallet.</p>
-        <form class="col s12 new-portfolio js-email">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="setup-form">
-                <div class="mp-form">
-                  <div class="form-group">
-                    <input id="userEmail" type="email" class="form-control validate" minlength="3" placeholder="Your email address" required>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 btn-portfolio text-left">
-              <button type="submit" class="btn btn-light-blue">Get verified</button>
-            </div>
-          </div>
-          <div class="clear"></div>
-        </form>
-      </div>
-      <!--<a href="https://github.com/kovan-testnet/faucet" class="btn btn-def btn-light-blue" target="blank" rel="noopener">Get some k-ethers here</a>-->
-    </div>
-  </div>
-  {{else}}
-  <div class="container">
-    <div class="row">
-      <div id="results" class="col-md-12 text-center error-message">
-        <h2 class="about-title">Pending email verification</h2>
-        <p>Check your mailbox, you must have received a confirmation email. After confirmation, you will receive some Kovan
-          test ether on your Metamask account and you will be ready to go!</p>
+        <p>You can request k-eth on our gitter channel or on the Kovan Faucet.</p>
+
+        <a class="btn btn-def btn-light-blue " href="https://gitter.im/melonproject/general?source=orgpage " target="blank" rel="noopener ">Melon Gitter</a>
+
+        <a href="https://github.com/kovan-testnet/faucet " class="btn btn-def btn-light-blue " target="blank " rel="noopener ">Kovan Faucet</a>
+        <!--<a href="https://github.com/kovan-testnet/faucet " class="btn btn-def btn-light-blue " target="blank
+          " rel="noopener ">Get some k-ethers here</a>-->
       </div>
     </div>
   </div>
-  {{/if}}
 </template>
 
 <!-- Ethereum Testnet -->
-<template name="uxEthereumTestnet">
-  <div class="container">
-    <div class="row">
-      <div id="results" class="col-md-12 text-center error-message">
-        <img src="/dist/img/switch_network.png">
-        <h2 class="about-title">Ethereum Testnet</h2>
+<template name="uxEthereumTestnet ">
+  <div class="container ">
+    <div class="row ">
+      <div id="results " class="col-md-12 text-center error-message ">
+        <img src="/dist/img/switch_network.png ">
+        <h2 class="about-title ">Ethereum Testnet</h2>
         <p>Well done you're connected with Metamask. Now switch to the Kovan network to use this application. You will be asked
           to type your password again. If the page takes too long to reload, please refresh.</p>
       </div>
@@ -245,7 +219,7 @@
 <template name="visitorAccess">
   <span>Visitor Access</span>
   <ul>
-    <li class="btn-request"><a href="/visit" class="btn btn-outline-white">Visitor View</a></li>
+    <li class="btn-request "><a href="/visit" class="btn btn-outline-white">Visitor View</a></li>
   </ul>
 </template>
 
@@ -257,9 +231,9 @@
       <li>
         <p class="status"><b>Compatible with: </b></p>
       </li>
-      <li><a class="white-text" href="https://parity.io/" target="_blank">Parity</a></li>
-      <li><a class="white-text" href="https://metamask.io/" target="_blank">MetaMask</a></li>
-      <li><a class="white-text" href="https://github.com/ethereum/mist/releases/tag/v0.8.8" target="_blank">Mist</a></li>
+      <li><a class="white-text" href="https://parity.io/ " target="_blank ">Parity</a></li>
+      <li><a class="white-text" href="https://metamask.io/ " target="_blank ">MetaMask</a></li>
+      <li><a class="white-text" href="https://github.com/ethereum/mist/releases/tag/v0.8.8 " target="_blank ">Mist</a></li>
     </li>
   </ul>
 </template>
