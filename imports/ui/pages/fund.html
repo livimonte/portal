@@ -26,5 +26,5 @@
       </div>
     </div>
   </section>
-  {{else}} {{> uxFundNotFound}} {{/if}}
+  {{else}} {{#if loading}} {{> uxLoading}} {{else}} {{> uxFundNotFound}} {{/if}} {{/if}}
 </template>
