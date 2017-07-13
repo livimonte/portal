@@ -3,17 +3,7 @@
   <ul>
     <li>
       <p class="status">Status:</p>
-      {{#if isErrorNetworkStatus}}
-      <p class="value">TX Error</p>
-      {{/if}} {{#if isMiningNetworkStatus}}
-      <p class="value">Sending</p>
-      {{/if}} {{#if isMinedNetworkStatus}}
-      <p class="value">Sent</p>
-      {{/if}} {{#if isReady}}
-      <p class="value">Connected</p>
-      {{else}}
-      <p class="value">{{getReadyState}}</p>
-      {{/if}}
+      <p class="value">{{getNetworkStatus}}</p>
     </li>
 
     {{#if isMiningNetworkStatus}}

@@ -21,7 +21,12 @@ Template.melonSummary.onCreated(() => {
 
 Template.melonSummary.helpers({
   isReady: () => Template.instance().readyState.get() === 'Ready',
-  getReadyState: () => Template.instance().readyState.get(),
+  getNetworkStatus: () => {
+    const readyState = Template.instance().readyState.get();
+    const networkStatus = Session.get('NetworkStatus');
+
+    return networkStatus.isMining ? 'Sending ...' : readyState;
+  },
   getRanking() {
     const numberOfVaults = Vaults.find().count();
     let coreAddress = FlowRouter.getParam('address');
