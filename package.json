@@ -23,7 +23,10 @@
       "node": true,
       "jest": true
     },
-    "extends": "@meteorjs/eslint-config-meteor"
+    "extends": "@meteorjs/eslint-config-meteor",
+    "rules": {
+      "max-len": ["error", 80, 2]
+    }
   },
   "babel": {
     "presets": ["flow", "meteor", "es2015", "react"]

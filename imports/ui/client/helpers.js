@@ -10,20 +10,43 @@ import convertFromTokenPrecision from '/imports/melon/interface/helpers/convertF
 
 // Server network
 Template.registerHelper('isLoaded', () => Session.get('isLoaded'));
-Template.registerHelper('isServerConnected', () => Session.get('isServerConnected'));
+Template.registerHelper('isServerConnected', () =>
+  Session.get('isServerConnected'),
+);
 // Client network
-Template.registerHelper('isClientConnected', () => Session.get('isClientConnected'));
-Template.registerHelper('isMainNetwork', () => Session.get('network') === 'Main');
-Template.registerHelper('isRopstenNetwork', () => Session.get('network') === 'Ropsten');
-Template.registerHelper('isPrivateNetwork', () => Session.get('network') === 'Private');
-Template.registerHelper('isKovanNetwork', () => Session.get('network') === 'Kovan');
+Template.registerHelper('isClientConnected', () =>
+  Session.get('isClientConnected'),
+);
+Template.registerHelper(
+  'isMainNetwork',
+  () => Session.get('network') === 'Main',
+);
+Template.registerHelper(
+  'isRopstenNetwork',
+  () => Session.get('network') === 'Ropsten',
+);
+Template.registerHelper(
+  'isPrivateNetwork',
+  () => Session.get('network') === 'Private',
+);
+Template.registerHelper(
+  'isKovanNetwork',
+  () => Session.get('network') === 'Kovan',
+);
 Template.registerHelper('getNetwork', () => Session.get('network'));
 Template.registerHelper('isSynced', () => Session.get('isSynced'));
 Template.registerHelper('currentBlock', () => Session.get('currentBlock'));
 // Account
-Template.registerHelper('selectedAccount', () => Session.get('selectedAccount'));
-Template.registerHelper('selectedAccountBalance', () => Session.get('selectedAccountBalance'));
-Template.registerHelper('sufficientFund', () => Session.get('selectedAccountBalance') !== '0');
+Template.registerHelper('selectedAccount', () =>
+  Session.get('selectedAccount'),
+);
+Template.registerHelper('selectedAccountBalance', () =>
+  Session.get('selectedAccountBalance'),
+);
+Template.registerHelper(
+  'sufficientFund',
+  () => Session.get('selectedAccountBalance') !== '0',
+);
 // Vaults
 Template.registerHelper('getVaults', () =>
   Vaults.find({}, { sort: { notional: -1, sharePrice: -1 } }),
@@ -74,8 +97,9 @@ Template.registerHelper(
 Template.registerHelper(
   'getIsFundedVault',
   () =>
-    (Vaults.find({ owner: Session.get('selectedAccount') }).fetch()[0] || { sharesSupply: 0 })
-      .sharesSupply !== 0,
+    (Vaults.find({ owner: Session.get('selectedAccount') }).fetch()[0] || {
+      sharesSupply: 0,
+    }).sharesSupply !== 0,
 );
 Template.registerHelper('getPortfolioDoc', () => {
   const address = FlowRouter.getParam('address');
@@ -83,10 +107,14 @@ Template.registerHelper('getPortfolioDoc', () => {
   return doc === undefined || address === undefined ? '' : doc;
 });
 // UX
-Template.registerHelper('isInactiveNetworkStatus', () => Session.get('NetworkStatus').isInactive);
-Template.registerHelper('isMiningNetworkStatus', () => Session.get('NetworkStatus').isMining);
-Template.registerHelper('isErrorNetworkStatus', () => Session.get('NetworkStatus').isError);
-Template.registerHelper('isMinedNetworkStatus', () => Session.get('NetworkStatus').isMined);
+Template.registerHelper(
+  'isInactiveNetworkStatus',
+  () => Session.get('NetworkStatus').isInactive,
+);
+Template.registerHelper(
+  'isMiningNetworkStatus',
+  () => Session.get('NetworkStatus').isMining,
+);
 // Reference currency
 Template.registerHelper('refCurrency', () => Session.get('referenceCurrency'));
 Template.registerHelper('showModal', () => Session.get('showModal'));
