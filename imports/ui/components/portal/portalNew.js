@@ -19,6 +19,12 @@ Template.portalNew.onCreated(() => {
 
 Template.portalNew.helpers({
   ...addressList,
+  // isSelected: () => {
+  //   if (this.selected === 'true') {
+  //     return true;
+  //   }
+  //   return false;
+  // },
 });
 
 Template.portalNew.onRendered(() => { });
@@ -36,6 +42,10 @@ Template.portalNew.events({
       Session.set('selectedRegistarIsMelon', true);
     }
   },
+  // 'change #checkbox': (event, templateInstance) => {
+  //   // const x = templateInstance.find('#checkbox').is(':checked').val();
+  //   console.log(event.target.checked);
+  // },
   'submit form#new_portfolio': (event, templateInstance) => {
     // Prevent default browser form submit
     event.preventDefault();
@@ -43,6 +53,10 @@ Template.portalNew.events({
 
     if (!templateInstance.find('input#portfolio_name').value) {
       alert('Please enter a portfolio name.');
+      return;
+    }
+    if (templateInstance.find('#checkbox').checked === false) {
+      alert('Sorry, you can\'t take part into the competition if you do not agree to our Terms and Conditions.');
       return;
     }
     // const email = templateInstance.find('input#portfolio_email').value;
