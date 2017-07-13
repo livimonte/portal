@@ -14,7 +14,10 @@ import { ReactiveVar } from 'meteor/reactive-var';
 // Specs
 import specs from '/imports/melon/interface/helpers/specs';
 import convertFromTokenPrecision from '/imports/melon/interface/helpers/convertFromTokenPrecision';
-import { getTokenAddress, getTokenNameBySymbol } from '/imports/melon/interface/helpers/specs';
+import {
+  getTokenAddress,
+  getTokenNameBySymbol,
+} from '/imports/melon/interface/helpers/specs';
 
 // Corresponding html file
 import './manageOverview.html';
@@ -29,7 +32,7 @@ const assetPairs = [...Array(numberOfQuoteTokens * numberOfBaseTokens).keys()]
       '/',
       specs.getQuoteTokens()[index % numberOfQuoteTokens],
     ].join(''),
-)
+  )
   .sort();
 
 FlowRouter.triggers.enter(
@@ -62,7 +65,9 @@ Template.manageOverview.onCreated(() => {
   Meteor.call('assets.sync', FlowRouter.getParam('address'));
   Meteor.subscribe('assets', FlowRouter.getParam('address'));
   const template = Template.instance();
-  template.currentAssetPair = new ReactiveVar();
+  template.currentAssetPair = new ReactiveVar(
+    store.getState().manageHoldings.currentAssetPair,
+  );
   store.subscribe(() => {
     const currentState = store.getState().manageHoldings;
     template.currentAssetPair.set(currentState.currentAssetPair);
@@ -74,11 +79,20 @@ Template.manageOverview.onCreated(() => {
 Template.manageOverview.helpers({
   assetPairs,
   currentAssetPair: () => Session.get('currentAssetPair'),
-  baseTokenSymbol: () => Template.instance().currentAssetPair.get().baseTokenSymbol,
-  quoteTokenSymbol: () => Template.instance().currentAssetPair.get().quoteTokenSymbol,
-  baseTokenName: () => getTokenNameBySymbol(Template.instance().currentAssetPair.get().baseTokenSymbol),
-  quoteTokenName: () => getTokenNameBySymbol(Template.instance().currentAssetPair.get().quoteTokenSymbol),
-  selected: assetPair => (assetPair === Session.get('currentAssetPair') ? 'selected' : ''),
+  baseTokenSymbol: () =>
+    Template.instance().currentAssetPair.get().baseTokenSymbol,
+  quoteTokenSymbol: () =>
+    Template.instance().currentAssetPair.get().quoteTokenSymbol,
+  baseTokenName: () =>
+    getTokenNameBySymbol(
+      Template.instance().currentAssetPair.get().baseTokenSymbol,
+    ),
+  quoteTokenName: () =>
+    getTokenNameBySymbol(
+      Template.instance().currentAssetPair.get().quoteTokenSymbol,
+    ),
+  selected: assetPair =>
+    assetPair === Session.get('currentAssetPair') ? 'selected' : '',
   isFromPortfolio: () => (Session.get('fromPortfolio') ? 'checked' : ''),
   getPortfolioDoc() {
     const address = FlowRouter.getParam('address');
@@ -92,8 +106,13 @@ Template.manageOverview.helpers({
   getAssetHoldings(symbol) {
     const assetHolderAddress = FlowRouter.getParam('address');
     const tokenAddress = getTokenAddress(symbol);
-    const asset = Assets.findOne({ holder: assetHolderAddress, address: tokenAddress });
-    if (asset) return convertFromTokenPrecision(asset.holdings, asset.precision);
+    const asset = Assets.findOne({
+      holder: assetHolderAddress,
+      address: tokenAddress,
+    });
+    if (asset) {
+      return convertFromTokenPrecision(asset.holdings, asset.precision);
+    }
   },
 });
 
