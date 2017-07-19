@@ -3,6 +3,7 @@ import BigNumber from 'bignumber.js';
 
 import addressList from '../addressList';
 import takeOrder from '../takeOrder';
+import convertFromTokenPrecision from '../helpers/convertFromTokenPrecision';
 
 jest.mock('/imports/lib/web3', () => jest.fn(() => 42), { virtual: true });
 
@@ -20,7 +21,7 @@ test('without quantity (-> max) & basic calling testing', async () => {
   ).toHaveBeenCalledWith(
     addressList.exchange,
     6870,
-    new BigNumber('855505176'),
+    new BigNumber('8555051760000000000'),
     {
       from: '0xMANAGER',
     },
@@ -42,7 +43,7 @@ test('with higher quantity -> take max', async () => {
   ).toHaveBeenCalledWith(
     addressList.exchange,
     6870,
-    new BigNumber('855505176'),
+    new BigNumber('8555051760000000000'),
     {
       from: '0xMANAGER',
     },
@@ -54,17 +55,17 @@ test('with lower quantity -> take as specified', async () => {
     6870,
     '0xMANAGER',
     '0xVAULT',
-    new BigNumber('1.00000000'),
+    new BigNumber('1'),
   );
 
   expect(result).toBeTruthy();
-  expect(result.executedQuantity.eq('1.00000000')).toBeTruthy();
+  expect(result.executedQuantity.eq('1')).toBeTruthy();
   expect(
     contract.mockInspect.instance.takeOrder,
   ).toHaveBeenCalledWith(
     addressList.exchange,
     6870,
-    new BigNumber('100000000'),
+    new BigNumber('1000000000000000000'),
     {
       from: '0xMANAGER',
     },
