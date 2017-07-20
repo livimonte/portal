@@ -1,4 +1,5 @@
 import orderBook from '../__fixtures__/blockChainOrders';
+import BigNumber from 'bignumber.js';
 
 const instance = {
   orders: jest.fn(
@@ -13,10 +14,10 @@ const instance = {
         resolve({ transactionHash: '0xBLUB' });
       }),
   ),
-  getBalance: jest.fn(
-    (tokenAddress, ofAddress) =>
+  balanceOf: jest.fn(
+    ofAddress =>
       new Promise((resolve) => {
-        resolve({ totalSupply: '1000000000', balanceOf: '50000000' });
+        resolve({ balanceOf: new BigNumber(10) });
       }),
   ),
 };
