@@ -38,6 +38,12 @@ const instance = {
         resolve(new BigNumber(4));
       }),
   ),
+  transferFrom: jest.fn(
+    (fromAddress, toAddress, quantity) =>
+      new Promise((resolve) => {
+        resolve(new BigNumber(5));
+      }),
+  ),
 };
 
 const contract = {
