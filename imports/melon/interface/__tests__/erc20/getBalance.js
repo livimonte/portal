@@ -1,6 +1,4 @@
 import contract from 'truffle-contract';
-import BigNumber from 'bignumber.js';
-
 import getBalance from '../../erc20/getBalance';
 
 jest.mock('/imports/lib/web3', () => jest.fn(), { virtual: true });

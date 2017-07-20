@@ -20,6 +20,12 @@ const instance = {
         resolve({ balanceOf: new BigNumber(10) });
       }),
   ),
+  totalSupply: jest.fn(
+    () =>
+      new Promise((resolve) => {
+        resolve(new BigNumber(1000));
+      }),
+  ),
 };
 
 const contract = {
