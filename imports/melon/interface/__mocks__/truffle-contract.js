@@ -10,7 +10,13 @@ const instance = {
   takeOrder: jest.fn(
     (exchange, id, quantity, objects) =>
       new Promise((resolve) => {
-        resolve({ tranactionHash: '0xBLUB' });
+        resolve({ transactionHash: '0xBLUB' });
+      }),
+  ),
+  getBalance: jest.fn(
+    (tokenAddress, ofAddress) =>
+      new Promise((resolve) => {
+        resolve({ totalSupply: '1000000000', balanceOf: '50000000' });
       }),
   ),
 };

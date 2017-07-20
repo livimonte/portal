@@ -3,7 +3,6 @@ import BigNumber from 'bignumber.js';
 
 import addressList from '../addressList';
 import takeOrder from '../takeOrder';
-import convertFromTokenPrecision from '../helpers/convertFromTokenPrecision';
 
 jest.mock('/imports/lib/web3', () => jest.fn(() => 42), { virtual: true });
 
