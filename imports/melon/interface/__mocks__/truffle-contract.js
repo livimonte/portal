@@ -32,6 +32,12 @@ const instance = {
         resolve(new BigNumber(3));
       }),
   ),
+  approve: jest.fn(
+    (toAddress, quantity, { from: fromAddress }) =>
+      new Promise((resolve) => {
+        resolve(new BigNumber(4));
+      }),
+  ),
 };
 
 const contract = {
