@@ -44,6 +44,12 @@ const instance = {
         resolve(new BigNumber(5));
       }),
   ),
+  allowance: jest.fn(
+    (ownerAddress, spenderAddress) =>
+      new Promise((resolve) => {
+        resolve(new BigNumber(6));
+      }),
+  ),
 };
 
 const contract = {
