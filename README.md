@@ -102,15 +102,15 @@ synced from the blockchain.
 
 
 
-[gitter-badge]: https://badges.gitter.im/melonproject/general.svg
+[gitter-badge]: https://badges.gitter.im/melonproject/general.svg?style=flat-square
 [gitter-url]: https://gitter.im/melonproject/general?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-[license-badge]: https://img.shields.io/badge/License-GPL%20v3-blue.svg
+[license-badge]: https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square
 [license-badge-url]: ./LICENSE
-[dependencies-badge]: https://img.shields.io/david/melonproject/portal.svg
+[dependencies-badge]: https://img.shields.io/david/melonproject/portal.svg?style=flat-square
 [dependencies-badge-url]: https://david-dm.org/melonproject/portal
-[devDependencies-badge]: https://img.shields.io/david/dev/melonproject/portal.svg
+[devDependencies-badge]: https://img.shields.io/david/dev/melonproject/portal.svg?style=flat-square
 [devDependencies-badge-url]: https://david-dm.org/melonproject/portal#info=devDependencies
 [NSP Status badge]: https://nodesecurity.io/orgs/melonproject/projects/cb1dd04e-1069-4ffd-8210-70ec757ed3de/badge
 [NSP Status]: https://nodesecurity.io/orgs/melonproject/projects/cb1dd04e-1069-4ffd-8210-70ec757ed3de
-[Sentry Badge]: https://img.shields.io/badge/crash%20reports-sentry-%2396B0C2.svg
+[Sentry Badge]: https://img.shields.io/badge/crash%20reports-sentry-%2396B0C2.svg?style=flat-square
 [Sentry]: https://sentry.io/melonproject/
