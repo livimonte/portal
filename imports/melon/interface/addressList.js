@@ -1,10 +1,14 @@
-import ExchangeJson from '@melonproject/protocol/build/contracts/Exchange.json';
+// import ExchangeJson from '@melonproject/protocol/build/contracts/Exchange.json';
 import UniverseJson from '@melonproject/protocol/build/contracts/Universe.json';
-import SubscribeJson from '@melonproject/protocol/build/contracts/Subscribe.json';
-import RedeemJson from '@melonproject/protocol/build/contracts/Redeem.json';
+// import SubscribeJson from '@melonproject/protocol/build/contracts/Subscribe.json';
+// import RedeemJson from '@melonproject/protocol/build/contracts/Redeem.json';
+import ParticipationJson from '@melonproject/protocol/build/contracts/Participation.json';
+
 import RiskMgmtV1Json from '@melonproject/protocol/build/contracts/RiskMgmtV1.json';
-import ManagementFeeJson from '@melonproject/protocol/build/contracts/ManagementFee.json';
-import PerformanceFeeJson from '@melonproject/protocol/build/contracts/PerformanceFee.json';
+// import ManagementFeeJson from '@melonproject/protocol/build/contracts/ManagementFee.json';
+// import PerformanceFeeJson from '@melonproject/protocol/build/contracts/PerformanceFee.json';
+
+import RewardsJson from '@melonproject/protocol/build/contracts/Universe.json';
 import GovernanceJson from '@melonproject/protocol/build/contracts/Governance.json';
 import VersionJson from '@melonproject/protocol/build/contracts/Version.json';
 
@@ -21,20 +25,21 @@ exports.repToken = '0xf61b8003637e5d5dbb9ca8d799ab54e5082cbdbc';
 
 // Price Feeds
 
-exports.cryptoCompare = '0x442Fd95C32162F914364C5fEFf27A0Dc05214706';
+exports.cryptoCompare = '0xAA959664FE49c5734748d80d11805c3909d9B147';
 
 // Exchanges
 
-exports.exchange = ExchangeJson.networks[KOVAN_NETWORK_ID].address;
+exports.exchange = '0x47c158e0412a81a2dc330b6818522656519daafc';
 
 // Universe
 
-exports.universe = UniverseJson.networks[KOVAN_NETWORK_ID].address;
+exports.universe = RewardsJson.networks[KOVAN_NETWORK_ID].address;
 
 // Participation
+exports.participation = ParticipationJson.networks[KOVAN_NETWORK_ID].address;
 
-exports.subscribe = SubscribeJson.networks[KOVAN_NETWORK_ID].address;
-exports.redeem = RedeemJson.networks[KOVAN_NETWORK_ID].address;
+// exports.subscribe = SubscribeJson.networks[KOVAN_NETWORK_ID].address;
+// exports.redeem = RedeemJson.networks[KOVAN_NETWORK_ID].address;
 
 // Risk Mgmt
 
@@ -42,8 +47,9 @@ exports.riskMgmt = RiskMgmtV1Json.networks[KOVAN_NETWORK_ID].address;
 
 // Fees
 
-exports.managementFee = ManagementFeeJson.networks[KOVAN_NETWORK_ID].address;
-exports.performanceFee = PerformanceFeeJson.networks[KOVAN_NETWORK_ID].address;
+// exports.managementFee = ManagementFeeJson.networks[KOVAN_NETWORK_ID].address;
+// exports.performanceFee = PerformanceFeeJson.networks[KOVAN_NETWORK_ID].address;
+exports.rewards = RewardsJson.networks[KOVAN_NETWORK_ID].address;
 
 // Governance
 
@@ -52,4 +58,4 @@ exports.version = VersionJson.networks[KOVAN_NETWORK_ID].address;
 
 // Liquidity Provider
 
-exports.liquidityProvider = '0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf';
+exports.liquidityProvider = '0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd';

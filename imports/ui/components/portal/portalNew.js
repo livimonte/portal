@@ -66,9 +66,25 @@ Template.portalNew.events({
     const PORTFOLIO_NAME = templateInstance.find('input#portfolio_name').value;
     const PORTFOLIO_SYMBOL = 'MLN-P';
     const PORTFOLIO_DECIMALS = 18;
+    console.log(
+      PORTFOLIO_NAME,
+      PORTFOLIO_SYMBOL,
+      PORTFOLIO_DECIMALS,
+      /* TODO take below address from user input */
+      addressList.universe,
+      // addressList.subscribe,
+      // addressList.redeem,
+      addressList.participation,
+
+      addressList.riskMgmt,
+      // addressList.managementFee,
+      // addressList.performanceFee,
+      addressList.rewards,
+    );
     const gasLimit = store.getState().web3.gasLimit;
 
     // Deploy
+    console.log(addressList.version);
     const versionContract = Version.at(addressList.version);
     Session.set('NetworkStatus', {
       isInactive: false,
@@ -76,7 +92,6 @@ Template.portalNew.events({
       isError: false,
       isMined: false,
     });
-
     versionContract
       .createVault(
       PORTFOLIO_NAME,
@@ -84,12 +99,15 @@ Template.portalNew.events({
       PORTFOLIO_DECIMALS,
       /* TODO take below address from user input */
       addressList.universe,
-      addressList.subscribe,
-      addressList.redeem,
+      // addressList.subscribe,
+      // addressList.redeem,
+      addressList.participation,
+
       addressList.riskMgmt,
-      addressList.managementFee,
-      addressList.performanceFee,
-      { from: Session.get('selectedAccount'), gas: gasLimit },
+      // addressList.managementFee,
+      // addressList.performanceFee,
+      addressList.rewards,
+      // { from: Session.get('selectedAccount'), gas: gasLimit },
     )
       .then((result) => {
         let id;
@@ -118,6 +136,7 @@ Template.portalNew.events({
         FlowRouter.go(`/fund/${address}`);
       })
       .catch((err) => {
+        console.log(err);
         toastr.error(
           'Oops, an error has occurred. Please verify your fund informations.',
         );
