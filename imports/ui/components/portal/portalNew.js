@@ -94,7 +94,7 @@ Template.portalNew.events({
       addressList.participation,
       addressList.riskMgmt,
       addressList.rewards,
-      { from: Session.get('selectedAccount'), gas: gasLimit },
+      { from: Session.get('selectedAccount') },
     )
       .then((result) => {
         let id;

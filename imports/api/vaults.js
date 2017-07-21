@@ -95,7 +95,7 @@ Vaults.syncVaultById = (id) => {
       return vaultContract.performCalculations();
     })
     .then((calculations) => {
-      // [gav, managementFee, performanceFee, unclaimedFees, nav, sharePrice] = calculations;
+      // [gav, managementReward, performanceReward, unclaimedRewards, nav, sharePrice] = calculations;
       nav = calculations[4];
       sharePrice = calculations[5];
       return vaultContract.totalSupply();
