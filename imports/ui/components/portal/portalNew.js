@@ -70,21 +70,14 @@ Template.portalNew.events({
       PORTFOLIO_NAME,
       PORTFOLIO_SYMBOL,
       PORTFOLIO_DECIMALS,
-      /* TODO take below address from user input */
       addressList.universe,
-      // addressList.subscribe,
-      // addressList.redeem,
       addressList.participation,
-
       addressList.riskMgmt,
-      // addressList.managementFee,
-      // addressList.performanceFee,
       addressList.rewards,
     );
     const gasLimit = store.getState().web3.gasLimit;
 
     // Deploy
-    console.log(addressList.version);
     const versionContract = Version.at(addressList.version);
     Session.set('NetworkStatus', {
       isInactive: false,
@@ -97,17 +90,11 @@ Template.portalNew.events({
       PORTFOLIO_NAME,
       PORTFOLIO_SYMBOL,
       PORTFOLIO_DECIMALS,
-      /* TODO take below address from user input */
       addressList.universe,
-      // addressList.subscribe,
-      // addressList.redeem,
       addressList.participation,
-
       addressList.riskMgmt,
-      // addressList.managementFee,
-      // addressList.performanceFee,
       addressList.rewards,
-      // { from: Session.get('selectedAccount'), gas: gasLimit },
+      { from: Session.get('selectedAccount'), gas: gasLimit },
     )
       .then((result) => {
         let id;

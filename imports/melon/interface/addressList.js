@@ -1,14 +1,7 @@
-// import ExchangeJson from '@melonproject/protocol/build/contracts/Exchange.json';
 import UniverseJson from '@melonproject/protocol/build/contracts/Universe.json';
-// import SubscribeJson from '@melonproject/protocol/build/contracts/Subscribe.json';
-// import RedeemJson from '@melonproject/protocol/build/contracts/Redeem.json';
 import ParticipationJson from '@melonproject/protocol/build/contracts/Participation.json';
-
 import RiskMgmtV1Json from '@melonproject/protocol/build/contracts/RiskMgmtV1.json';
-// import ManagementFeeJson from '@melonproject/protocol/build/contracts/ManagementFee.json';
-// import PerformanceFeeJson from '@melonproject/protocol/build/contracts/PerformanceFee.json';
-
-import RewardsJson from '@melonproject/protocol/build/contracts/Universe.json';
+import RewardsJson from '@melonproject/protocol/build/contracts/Rewards.json';
 import GovernanceJson from '@melonproject/protocol/build/contracts/Governance.json';
 import VersionJson from '@melonproject/protocol/build/contracts/Version.json';
 
@@ -33,13 +26,10 @@ exports.exchange = '0x47c158e0412a81a2dc330b6818522656519daafc';
 
 // Universe
 
-exports.universe = RewardsJson.networks[KOVAN_NETWORK_ID].address;
+exports.universe = UniverseJson.networks[KOVAN_NETWORK_ID].address;
 
 // Participation
 exports.participation = ParticipationJson.networks[KOVAN_NETWORK_ID].address;
-
-// exports.subscribe = SubscribeJson.networks[KOVAN_NETWORK_ID].address;
-// exports.redeem = RedeemJson.networks[KOVAN_NETWORK_ID].address;
 
 // Risk Mgmt
 
@@ -47,8 +37,6 @@ exports.riskMgmt = RiskMgmtV1Json.networks[KOVAN_NETWORK_ID].address;
 
 // Fees
 
-// exports.managementFee = ManagementFeeJson.networks[KOVAN_NETWORK_ID].address;
-// exports.performanceFee = PerformanceFeeJson.networks[KOVAN_NETWORK_ID].address;
 exports.rewards = RewardsJson.networks[KOVAN_NETWORK_ID].address;
 
 // Governance
