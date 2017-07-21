@@ -4,11 +4,12 @@
 
 Application of the melon protocol portal. 
 
-[![Slack Status][slack-badge]][slack-url]
 [![Gitter][gitter-badge]][gitter-url]
 [![License: GPL v3][license-badge]][license-badge-url]
 [![Dependencies][dependencies-badge]][dependencies-badge-url]
 [![Dev Dependencies][devDependencies-badge]][devDependencies-badge-url]
+[![NSP Status][NSP Status badge]][NSP Status]
+[![Crash Reports: Sentry][Sentry Badge]][Sentry]
 
 
 ## Installation
@@ -101,11 +102,6 @@ synced from the blockchain.
 
 
 
-
-
-
-[slack-badge]: http://chat.melonport.com/badge.svg
-[slack-url]: http://chat.melonport.com
 [gitter-badge]: https://badges.gitter.im/melonproject/general.svg
 [gitter-url]: https://gitter.im/melonproject/general?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [license-badge]: https://img.shields.io/badge/License-GPL%20v3-blue.svg
@@ -114,3 +110,7 @@ synced from the blockchain.
 [dependencies-badge-url]: https://david-dm.org/melonproject/portal
 [devDependencies-badge]: https://img.shields.io/david/dev/melonproject/portal.svg
 [devDependencies-badge-url]: https://david-dm.org/melonproject/portal#info=devDependencies
+[NSP Status badge]: https://nodesecurity.io/orgs/melonproject/projects/cb1dd04e-1069-4ffd-8210-70ec757ed3de/badge
+[NSP Status]: https://nodesecurity.io/orgs/melonproject/projects/cb1dd04e-1069-4ffd-8210-70ec757ed3de
+[Sentry Badge]: https://img.shields.io/badge/crash%20reports-sentry-%2396B0C2.svg
+[Sentry]: https://sentry.io/melonproject/
