@@ -11,7 +11,6 @@ export const getTokenPrecisionByAddress = (address) => {
   }
   if (address === addressList.euroToken) return constants.EUROTOKEN_PRECISION;
   if (address === addressList.repToken) return constants.REPTOKEN_PRECISION;
-
   if (address === addressList.statusToken) return constants.STATUSTOKEN_PRECISION;
   if (address === addressList.aventcoinToken) return constants.AVENTCOINTOKEN_PRECISION;
   if (address === addressList.bancorToken) return constants.BANCORTOKEN_PRECISION;
@@ -39,7 +38,6 @@ export const getTokenSymbolByAddress = (address) => {
   if (address === addressList.bitcoinToken) return 'BTC-T';
   if (address === addressList.euroToken) return 'EUR-T';
   if (address === addressList.repToken) return 'REP-T';
-
   if (address === addressList.statusToken) return 'SNT-T';
   if (address === addressList.aventcoinToken) return 'AVT-T';
   if (address === addressList.bancorToken) return 'BNT-T';
@@ -66,7 +64,6 @@ export const getTokenNameBySymbol = (symbol) => {
   if (symbol === 'BTC-T') return 'Bitcoin Token';
   if (symbol === 'EUR-T') return 'Euro Token';
   if (symbol === 'REP-T') return 'Rep Token';
-
   if (symbol === 'SNT-T') return 'Status Network Token';
   if (symbol === 'AVT-T') return 'AventCoin';
   if (symbol === 'BNT-T') return 'Bancor Network Token';
@@ -94,7 +91,6 @@ export const getTokenAddress = (symbol) => {
   if (symbol === 'BTC-T') return addressList.bitcoinToken;
   if (symbol === 'EUR-T') return addressList.euroToken;
   if (symbol === 'REP-T') return addressList.repToken;
-
   if (symbol === 'SNT-T') return addressList.statusToken;
   if (symbol === 'AVT-T') return addressList.aventcoinToken;
   if (symbol === 'BNT-T') return addressList.bancorToken;
@@ -122,6 +118,24 @@ export const getTokenPrecisionBySymbol = (symbol) => {
   if (symbol === 'BTC-T') return constants.BITCOINTOKEN_PRECISION;
   if (symbol === 'EUR-T') return constants.EUROTOKEN_PRECISION;
   if (symbol === 'REP-T') return constants.REPTOKEN_PRECISION;
+  if (symbol === 'SNT-T') return constants.STATUSTOKEN_PRECISION;
+  if (symbol === 'AVT-T') return constants.AVENTCOINTOKEN_PRECISION;
+  if (symbol === 'BNT-T') return constants.BANCORTOKEN_PRECISION;
+  if (symbol === 'ANT-T') return constants.ARAGONTOKEN_PRECISION;
+  if (symbol === 'BAT-T') return constants.BASICATTENTIONTOKEN_PRECISION;
+  if (symbol === 'DOGE-T') return constants.DOGECOINTOKEN_PRECISION;
+  if (symbol === 'DGD-T') return constants.DIGIXDAOTOKEN_PRECISION;
+  if (symbol === 'LTC-T') return constants.LITECOINTOKEN_PRECISION;
+  if (symbol === 'DGX-T') return constants.DIGIXGOLDTOKEN_PRECISION;
+  if (symbol === 'ETC-T') return constants.ETHERCLASSICTOKEN_PRECISION;
+  if (symbol === 'MKR-T') return constants.MAKERDAOTOKEN_PRECISION;
+  if (symbol === 'GNT-T') return constants.GOLEMNETWORKTOKEN_PRECISION;
+  if (symbol === 'XRP-T') return constants.RIPPLETOKEN_PRECISION;
+  if (symbol === 'SNGLS-T') return constants.SINGULARDTVTOKEN_PRECISION;
+  if (symbol === 'ZRX-T') return constants.ZEROXTOKEN_PRECISION;
+  if (symbol === 'GNO-T') return constants.GNOSISTOKEN_PRECISION;
+  if (symbol === 'ICN-T') return constants.ICONOMITOKEN_PRECISION;
+
   return false;
 };
 
