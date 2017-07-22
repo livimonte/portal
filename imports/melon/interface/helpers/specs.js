@@ -66,6 +66,25 @@ export const getTokenNameBySymbol = (symbol) => {
   if (symbol === 'BTC-T') return 'Bitcoin Token';
   if (symbol === 'EUR-T') return 'Euro Token';
   if (symbol === 'REP-T') return 'Rep Token';
+
+  if (symbol === 'SNT-T') return 'Status Network Token';
+  if (symbol === 'AVT-T') return 'AventCoin';
+  if (symbol === 'BNT-T') return 'Bancor Network Token';
+  if (symbol === 'ANT-T') return 'Aragon Network Token';
+  if (symbol === 'BAT-T') return 'Basic Attention Token';
+  if (symbol === 'DOGE-T') return 'Dogecoin Token';
+  if (symbol === 'DGD-T') return 'Digix Dao Token';
+  if (symbol === 'LTC-T') return 'Litecoin Token';
+  if (symbol === 'DGX-T') return 'Digix Gold Token';
+  if (symbol === 'ETC-T') return 'Ether Classic Token';
+  if (symbol === 'MKR-T') return 'MakerDAO Token';
+  if (symbol === 'GNT-T') return 'Golem Network Token';
+  if (symbol === 'XRP-T') return 'Ripple Token';
+  if (symbol === 'SNGLS-T') return 'SingularDTV Token';
+  if (symbol === 'ZRX-T') return '0x Protocol Token';
+  if (symbol === 'GNO-T') return 'Gnosis Token';
+  if (symbol === 'ICN-T') return 'Iconomi Token';
+
   return false;
 };
 
@@ -75,6 +94,25 @@ export const getTokenAddress = (symbol) => {
   if (symbol === 'BTC-T') return addressList.bitcoinToken;
   if (symbol === 'EUR-T') return addressList.euroToken;
   if (symbol === 'REP-T') return addressList.repToken;
+
+  if (symbol === 'SNT-T') return addressList.statusToken;
+  if (symbol === 'AVT-T') return addressList.aventcoinToken;
+  if (symbol === 'BNT-T') return addressList.bancorToken;
+  if (symbol === 'ANT-T') return addressList.aragonToken;
+  if (symbol === 'BAT-T') return addressList.basicAttentionToken;
+  if (symbol === 'DOGE-T') return addressList.dogecoinToken;
+  if (symbol === 'DGD-T') return addressList.digixDaoToken;
+  if (symbol === 'LTC-T') return addressList.litecoinToken;
+  if (symbol === 'DGX-T') return addressList.digixGoldToken;
+  if (symbol === 'ETC-T') return addressList.etherClassicToken;
+  if (symbol === 'MKR-T') return addressList.makerDaoToken;
+  if (symbol === 'GNT-T') return addressList.golemNetworkToken;
+  if (symbol === 'XRP-T') return addressList.rippleToken;
+  if (symbol === 'SNGLS-T') return addressList.singularDtvToken;
+  if (symbol === 'ZRX-T') return addressList.zeroXToken;
+  if (symbol === 'GNO-T') return addressList.gnosisToken;
+  if (symbol === 'ICN-T') return addressList.iconomiToken;
+
   return false;
 };
 
