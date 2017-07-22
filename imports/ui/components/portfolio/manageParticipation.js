@@ -33,8 +33,8 @@ Template.manageParticipation.onCreated(() => {
   store.subscribe(() => {
     const currentState = store.getState().vault;
     template.sharePrice.set(
-      // new BigNumber(currentState.sharePrice || 0).toString(),
-      new BigNumber(1).toString(),
+      new BigNumber(currentState.sharePrice || 0).toString(),
+      // new BigNumber(1).toString(),
 
     );
   });

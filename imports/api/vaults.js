@@ -84,21 +84,16 @@ Vaults.syncVaultById = (id) => {
     .vaults(id)
     .then((info) => {
       console.log('-------------- ', info);
-      console.log('IMHERE1');
       [address, owner, name, symbol, decimals, isActive, timestamp] = info;
       vaultContract = Vault.at(address);
 
       return vaultContract.getUniverseAddress();
     })
     .then((result) => {
-      console.log('IMHERE2');
-      console.log('---------UNIVERSE ADDRESS', result);
       universeAddress = result;
       return vaultContract.getReferenceAsset();
     })
     .then((result) => {
-      console.log('---------REFERENCE ASSET', result);
-
       referenceAsset = result;
       return vaultContract.performCalculations();
     })
