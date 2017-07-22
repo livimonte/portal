@@ -1,19 +1,35 @@
 /* global web3 */
 import contract from 'truffle-contract';
-import RedeemJson from '@melonproject/protocol/build/contracts/Redeem.json';
+import VaultJson from '@melonproject/protocol/build/contracts/Vault.json';
 
-import addressList from '/imports/melon/interface/addressList';
-
-const Redeem = contract(RedeemJson);
-Redeem.setProvider(web3.currentProvider);
-const redeemContract = Redeem.at(addressList.redeem);
+import depositAndApproveEther from './depositAndApproveEther';
 
 /*
-  @param quantityAsked: BigNumber quantity of Shares wanted to redeem
+  @param quantityAsked: BigNumber quantity of Shares wanted to receive
+  @param quantityOffered: BigNumber quantitiy of Ether willing to offer
 */
-const redeem = (id, managerAddress, vaultAddress, quantityAsked) =>
-  redeemContract.redeemShares(vaultAddress, quantityAsked, {
-    from: managerAddress,
-  });
+const redeem = async (
+  investor,
+  vaultAddress,
+  quantityAsked,
+  quantityOffered,
+) => {
+  await depositAndApproveEther(
+    investor,
+    vaultAddress,
+    quantityOffered,
+  );
+  const Vault = contract(VaultJson);
+  Vault.setProvider(web3.currentProvider);
+  const vaultContract = Vault.at(vaultAddress);
+  const txHash = await vaultContract.redeemWithReferenceAsset(
+    quantityAsked,
+    quantityOffered,
+    {
+      from: investor,
+    },
+  );
+  return txHash;
+};
 
 export default redeem;

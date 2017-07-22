@@ -1,39 +1,35 @@
 /* global web3 */
 import contract from 'truffle-contract';
-import SubscribeJson from '@melonproject/protocol/build/contracts/Subscribe.json';
+import VaultJson from '@melonproject/protocol/build/contracts/Vault.json';
 
-import addressList from '/imports/melon/interface/addressList';
 import depositAndApproveEther from './depositAndApproveEther';
-
-const Subscribe = contract(SubscribeJson);
-Subscribe.setProvider(web3.currentProvider);
-const subscribeContract = Subscribe.at(addressList.subscribe);
 
 /*
   @param quantityAsked: BigNumber quantity of Shares wanted to receive
   @param quantityOffered: BigNumber quantitiy of Ether willing to offer
 */
-const subscribe = (
-  id,
-  managerAddress,
+const subscribe = async (
+  investor,
   vaultAddress,
   quantityAsked,
   quantityOffered,
 ) => {
-  depositAndApproveEther(
-    managerAddress,
+  await depositAndApproveEther(
+    investor,
     vaultAddress,
     quantityOffered,
-  ).then(() =>
-    subscribeContract.createSharesWithReferenceAsset(
-      vaultAddress,
-      quantityAsked,
-      quantityOffered,
-      {
-        from: managerAddress,
-      },
-    ),
   );
+  const Vault = contract(VaultJson);
+  Vault.setProvider(web3.currentProvider);
+  const vaultContract = Vault.at(vaultAddress);
+  const txHash = await vaultContract.subscribeWithReferenceAsset(
+    quantityAsked,
+    quantityOffered,
+    {
+      from: investor,
+    },
+  );
+  return txHash;
 };
 
 export default subscribe;
