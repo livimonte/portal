@@ -10,11 +10,28 @@ const KOVAN_NETWORK_ID = 42;
 // Assets
 
 // TODO Addresses are curr case sensitive!
-exports.etherToken = '0x7506c7bfed179254265d443856ef9bda19221cd7';
-exports.melonToken = '0x4dffea52b0b4b48c71385ae25de41ce6ad0dd5a7';
-exports.bitcoinToken = '0x9e4c56a633dd64a2662bdfa69de4fde33ce01bdd';
-exports.euroToken = '0xc151b622fded233111155ec273bfaf2882f13703';
-exports.repToken = '0xf61b8003637e5d5dbb9ca8d799ab54e5082cbdbc';
+exports.etherToken = '0x1a825e9bf3bdc8ef8b975f97c78b5208a947d0ec';
+exports.melonToken = '0x2a20ff70596e431ab26C2365acab1b988DA8eCCF';
+exports.bitcoinToken = '0xf53e3b6c12f8c66324a64f31277260c06d869732';
+exports.euroToken = '0xcaac95ab4d30ee8d6162e55eb3430134fec5af50';
+exports.repToken = '0x64aF87A36a407732320c4dc1852dEBC60cd81c5E';
+exports.statusToken = '0x64c4406c58c512f326d83065a72f12884105520b';
+exports.aventcoinToken = '0x20a0e0dece9fb6c690cdb439db2b385d271bda3f';
+exports.bancorToken = '0x764ae227ad6a6e143546772169265d76aa9337c6';
+exports.aragonToken = '0xd99aed09a65ee8377a2ffad8ed5407785c530869';
+exports.basicAttentionToken = '0xfee1d0dc0b5b6f2f20d8e9f7e95e9e367e4a61a7';
+exports.dogecoinToken = '0xc37cdfb70bd68f6fcf2ab0a97e1d6a12eaa9215f';
+exports.digixDaoToken = '0x3b7c7c457d3aae04a4631e4888aeeedd08b24e41';
+exports.litecoinToken = '0xf051264ab9046fd73cbd00df5e732d2ca78ee704';
+exports.digixGoldToken = '0x804b7f797eee4d51fef29b3ef7e525a3848a0c0f';
+exports.etherClassicToken = '0x334559e91238f466c95bb8241555f6ad27f5978b';
+exports.makerDaoToken = '0xe1b25bcae898ab228a13eac49ebba8d3df9add70';
+exports.golemNetworkToken = '0x08c24283f0b6c07ff9793a1b8534a49b32c07e73';
+exports.rippleToken = '0x3b43249de8eee169eea7226a48699fcba8df3686';
+exports.singularDtvToken = '0x4c4e2b285e446fb1974dcc3a665caba7c189a96f';
+exports.zeroXToken = '0xbb0449e9b66e2e1438522645cae6cf9cd8595793';
+exports.gnosisToken = '0xc73d78870ba5a3eaddc2be371af09b2c429cb2ca';
+exports.iconomiToken = '0xc87bad39aadb70257e2417bd8f4983361599394d';
 
 // Price Feeds
 
