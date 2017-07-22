@@ -33,7 +33,9 @@ Template.manageParticipation.onCreated(() => {
   store.subscribe(() => {
     const currentState = store.getState().vault;
     template.sharePrice.set(
-      new BigNumber(currentState.sharePrice || 0).toString(),
+      // new BigNumber(currentState.sharePrice || 0).toString(),
+      new BigNumber(1).toString(),
+
     );
   });
   store.dispatch(creators.requestCalculations(FlowRouter.getParam('address')));
@@ -169,10 +171,10 @@ Template.manageParticipation.events({
             EtherTokenContract.approve(vaultAddress, baseUnitVolume, {
               from: managerAddress,
             }),
-          )
+        )
           .then(result =>
             vaultContract.createShares(baseUnitVolume, { from: managerAddress }),
-          )
+        )
           .then((result) => {
             store.dispatch(
               creators.requestParticipation(vaultAddress, managerAddress),

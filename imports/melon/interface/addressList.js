@@ -46,4 +46,4 @@ exports.version = VersionJson.networks[KOVAN_NETWORK_ID].address;
 
 // Liquidity Provider
 
-exports.liquidityProvider = '0x00360d2b7D240Ec0643B6D819ba81A09e40E5bCd';
+exports.liquidityProvider = '0x00E0B33cDb3AF8B55CD8467d6d13BC0Ba8035acF';

@@ -99,7 +99,7 @@ Template.portalNew.events({
       .then((result) => {
         let id;
         for (let i = 0; i < result.logs.length; i += 1) {
-          if (result.logs[i].event === 'VaultUpdate') {
+          if (result.logs[i].event === 'VaultAdded') {
             id = result.logs[i].args.id.toNumber();
             console.log('Vault has been created');
             console.log(`Vault id: ${id}`);

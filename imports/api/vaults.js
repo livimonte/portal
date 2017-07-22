@@ -26,7 +26,7 @@ Vaults.watch = () => {
   Version.setProvider(web3.currentProvider);
   const versionContract = Version.at(addressList.version);
 
-  const vaults = versionContract.VaultUpdate(
+  const vaults = versionContract.VaultAdded(
     {},
     {
       fromBlock: web3.eth.blockNumber,
@@ -59,7 +59,7 @@ Vaults.syncVaultById = (id) => {
   Vault.setProvider(web3.currentProvider);
   Version.setProvider(web3.currentProvider);
   const versionContract = Version.at(addressList.version);
-
+  console.log('---------  syncing by id ---- ', id);
   let vaultContract;
   // Description of Vault
   let address;
@@ -74,6 +74,7 @@ Vaults.syncVaultById = (id) => {
   // Calculation of Vault
   let nav;
   let sharePrice;
+  let timestamp;
 
   // Temp
   let currTotalSupply;
@@ -82,19 +83,27 @@ Vaults.syncVaultById = (id) => {
   versionContract
     .vaults(id)
     .then((info) => {
-      [address, owner, name, symbol, decimals, isActive] = info;
+      console.log('-------------- ', info);
+      console.log('IMHERE1');
+      [address, owner, name, symbol, decimals, isActive, timestamp] = info;
       vaultContract = Vault.at(address);
+
       return vaultContract.getUniverseAddress();
     })
     .then((result) => {
+      console.log('IMHERE2');
+      console.log('---------UNIVERSE ADDRESS', result);
       universeAddress = result;
       return vaultContract.getReferenceAsset();
     })
     .then((result) => {
+      console.log('---------REFERENCE ASSET', result);
+
       referenceAsset = result;
       return vaultContract.performCalculations();
     })
     .then((calculations) => {
+      console.log('-----------CALCULATIONS -------- ', calculations);
       // [gav, managementReward, performanceReward, unclaimedRewards, nav, sharePrice] = calculations;
       nav = calculations[4];
       sharePrice = calculations[5];
