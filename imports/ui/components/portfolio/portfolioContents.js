@@ -80,7 +80,7 @@ Template.portfolioContents.helpers({
       case 'Rep Token':
         return Session.get('repChange24h');
       default:
-        return '';
+        return 'N/A';
     }
   },
 });
