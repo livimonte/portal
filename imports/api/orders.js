@@ -11,7 +11,7 @@ import getOrder from '/imports/melon/interface/getOrder';
 import serializeOrder from '/imports/melon/interface/helpers/serializeOrder';
 import deserializeOrder from '/imports/melon/interface/helpers/deserializeOrder';
 
-const NUMBERS_OF_ORDERS_TO_SYNC_ON_STARTUP = 96;
+const NUMBERS_OF_ORDERS_TO_SYNC_ON_STARTUP = 360;
 
 // COLLECTIONS
 const Orders = new Mongo.Collection('orders', { transform: deserializeOrder });
