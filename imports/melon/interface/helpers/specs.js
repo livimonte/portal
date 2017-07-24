@@ -149,6 +149,6 @@ export const networkMapping = {
 
 export const getQuoteTokens = () => ['ETH-T'];
 
-export const getBaseTokens = () => ['MLN-T', 'BTC-T', 'EUR-T', 'REP-T', 'ANT-T', 'AVT-T', 'BNT-T', 'BAT-T', 'DGD-T', 'DGX-T', 'DOGE-T', 'ETC-T', 'GNO-T', 'GNT-T', 'ICN-T', 'LTC-T', 'MKR-T', 'XRP-T', 'SNGLS-T', 'SNT-T', 'ZRX-T'];
+export const getBaseTokens = () => ['MLN-T', 'BTC-T', 'EUR-T', 'REP-T', 'ANT-T', 'BNT-T', 'BAT-T', 'DGD-T', 'DOGE-T', 'ETC-T', 'GNO-T', 'GNT-T', 'ICN-T', 'LTC-T', 'XRP-T', 'SNGLS-T', 'SNT-T'];
 
-export const getTokens = () => ['ETH-T', 'MLN-T', 'BTC-T', 'EUR-T', 'REP-T', 'ANT-T', 'AVT-T', 'BNT-T', 'BAT-T', 'DGD-T', 'DGX-T', 'DOGE-T', 'ETC-T', 'GNO-T', 'GNT-T', 'ICN-T', 'LTC-T', 'MKR-T', 'XRP-T', 'SNGLS-T', 'SNT-T', 'ZRX-T'];
+export const getTokens = () => ['ETH-T', 'MLN-T', 'BTC-T', 'EUR-T', 'REP-T', 'ANT-T', 'BNT-T', 'BAT-T', 'DGD-T', 'DOGE-T', 'ETC-T', 'GNO-T', 'GNT-T', 'ICN-T', 'LTC-T', 'XRP-T', 'SNGLS-T', 'SNT-T'];
