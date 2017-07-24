@@ -71,7 +71,7 @@ Template.orderBookContents.helpers({
   },
 });
 
-Template.orderBookContents.onRendered(() => {});
+Template.orderBookContents.onRendered(() => { });
 
 Template.orderBookContents.events({
   'click .js-takeorder': (event) => {

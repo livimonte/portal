@@ -11,9 +11,9 @@ const performCalculations = async (vaultAddress, precision = 18) => {
 
   return {
     gav: calculations[0].div(Math.pow(10, precision)),
-    managementFee: calculations[1].div(Math.pow(10, precision)),
-    performanceFee: calculations[2].div(Math.pow(10, precision)),
-    unclaimedFees: calculations[3].div(Math.pow(10, precision)),
+    managementReward: calculations[1].div(Math.pow(10, precision)),
+    performanceReward: calculations[2].div(Math.pow(10, precision)),
+    unclaimedRewards: calculations[3].div(Math.pow(10, precision)),
     nav: calculations[4].div(Math.pow(10, precision)),
     sharePrice: calculations[5].div(Math.pow(10, precision)),
   };

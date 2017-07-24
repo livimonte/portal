@@ -4,7 +4,7 @@ const orders = [
   {
     id: 6870,
     data: [
-      new BigNumber('855505176'),
+      new BigNumber('8555051760000000000'),
       '0xf61b8003637e5d5dbb9ca8d799ab54e5082cbdbc',
       new BigNumber('1000000000000000000'),
       '0x7506c7bfed179254265d443856ef9bda19221cd7',

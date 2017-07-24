@@ -76,25 +76,21 @@ Template.portalNew.events({
       isError: false,
       isMined: false,
     });
-
     versionContract
       .createVault(
       PORTFOLIO_NAME,
       PORTFOLIO_SYMBOL,
       PORTFOLIO_DECIMALS,
-      /* TODO take below address from user input */
       addressList.universe,
-      addressList.subscribe,
-      addressList.redeem,
+      addressList.participation,
       addressList.riskMgmt,
-      addressList.managementFee,
-      addressList.performanceFee,
+      addressList.rewards,
       { from: Session.get('selectedAccount'), gas: gasLimit },
     )
       .then((result) => {
         let id;
         for (let i = 0; i < result.logs.length; i += 1) {
-          if (result.logs[i].event === 'VaultUpdate') {
+          if (result.logs[i].event === 'VaultAdded') {
             id = result.logs[i].args.id.toNumber();
             console.log('Vault has been created');
             console.log(`Vault id: ${id}`);
@@ -118,6 +114,7 @@ Template.portalNew.events({
         FlowRouter.go(`/fund/${address}`);
       })
       .catch((err) => {
+        console.log(err);
         toastr.error(
           'Oops, an error has occurred. Please verify your fund informations.',
         );

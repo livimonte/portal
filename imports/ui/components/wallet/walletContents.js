@@ -60,7 +60,7 @@ Template.walletContents.helpers({
       case 'Euro Token':
         return Session.get('eurChange24h');
       default:
-        return '';
+        return 'N/A';
     }
   },
 });

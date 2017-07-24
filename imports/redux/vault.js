@@ -5,9 +5,9 @@ import getParticipation from '/imports/melon/interface/getParticipation';
 
 export const initialState = {
   gav: undefined,
-  managementFee: undefined,
-  performanceFee: undefined,
-  unclaimedFees: undefined,
+  managementReward: undefined,
+  performanceReward: undefined,
+  unclaimedRewards: undefined,
   nav: undefined,
   sharePrice: undefined,
   personalStake: undefined,

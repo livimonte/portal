@@ -26,7 +26,7 @@ Vaults.watch = () => {
   Version.setProvider(web3.currentProvider);
   const versionContract = Version.at(addressList.version);
 
-  const vaults = versionContract.VaultUpdate(
+  const vaults = versionContract.VaultAdded(
     {},
     {
       fromBlock: web3.eth.blockNumber,
@@ -59,7 +59,6 @@ Vaults.syncVaultById = (id) => {
   Vault.setProvider(web3.currentProvider);
   Version.setProvider(web3.currentProvider);
   const versionContract = Version.at(addressList.version);
-
   let vaultContract;
   // Description of Vault
   let address;
@@ -74,6 +73,7 @@ Vaults.syncVaultById = (id) => {
   // Calculation of Vault
   let nav;
   let sharePrice;
+  let timestamp;
 
   // Temp
   let currTotalSupply;
@@ -82,8 +82,9 @@ Vaults.syncVaultById = (id) => {
   versionContract
     .vaults(id)
     .then((info) => {
-      [address, owner, name, symbol, decimals, isActive] = info;
+      [address, owner, name, symbol, decimals, isActive, timestamp] = info;
       vaultContract = Vault.at(address);
+
       return vaultContract.getUniverseAddress();
     })
     .then((result) => {
@@ -95,7 +96,7 @@ Vaults.syncVaultById = (id) => {
       return vaultContract.performCalculations();
     })
     .then((calculations) => {
-      // [gav, managementFee, performanceFee, unclaimedFees, nav, sharePrice] = calculations;
+      // [gav, managementReward, performanceReward, unclaimedRewards, nav, sharePrice] = calculations;
       nav = calculations[4];
       sharePrice = calculations[5];
       return vaultContract.totalSupply();

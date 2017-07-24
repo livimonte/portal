@@ -7,7 +7,7 @@ jest.mock('truffle-contract');
 
 test('getOrder', async () => {
   const order = await getOrder(6870);
-
+  console.log(order.sell.howMuch.toNumber());
   expect(order.sell.howMuch.eq('8.55505176')).toBeTruthy();
   expect(contract).toHaveBeenCalledTimes(1);
   expect(contract().setProvider).toHaveBeenCalledTimes(1);

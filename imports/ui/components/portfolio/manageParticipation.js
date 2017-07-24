@@ -9,6 +9,8 @@ import BigNumber from 'bignumber.js';
 // Contracts
 import VaultJson from '@melonproject/protocol/build/contracts/Vault.json'; // Get Smart Contract JSON
 import EtherTokenJson from '@melonproject/protocol/build/contracts/EtherToken.json';
+import subscribe from '/imports/melon/interface/subscribe';
+import redeem from '/imports/melon/interface/redeem';
 
 import web3 from '/imports/lib/web3/client';
 import addressList from '/imports/melon/interface/addressList';
@@ -34,6 +36,8 @@ Template.manageParticipation.onCreated(() => {
     const currentState = store.getState().vault;
     template.sharePrice.set(
       new BigNumber(currentState.sharePrice || 0).toString(),
+      // new BigNumber(1).toString(),
+
     );
   });
   store.dispatch(creators.requestCalculations(FlowRouter.getParam('address')));
@@ -164,45 +168,36 @@ Template.manageParticipation.events({
     switch (type) {
       // Invest case
       case 0:
-        EtherTokenContract.deposit({ from: managerAddress, value: weiTotal })
-          .then(result =>
-            EtherTokenContract.approve(vaultAddress, baseUnitVolume, {
-              from: managerAddress,
-            }),
-          )
-          .then(result =>
-            vaultContract.createShares(baseUnitVolume, { from: managerAddress }),
-          )
-          .then((result) => {
-            store.dispatch(
-              creators.requestParticipation(vaultAddress, managerAddress),
-            );
-            store.dispatch(creators.requestCalculations(vaultAddress));
+        // subscribe(investor, vaultAddress, quantityAsked, quantityOffered);
+        subscribe(managerAddress, vaultAddress, baseUnitVolume, baseUnitVolume).then(() => {
+          store.dispatch(
+            creators.requestParticipation(vaultAddress, managerAddress),
+          );
+          store.dispatch(creators.requestCalculations(vaultAddress));
 
-            Session.set('NetworkStatus', {
-              isInactive: false,
-              isMining: false,
-              isError: false,
-              isMined: true,
-            });
-            toastr.success('Shares successfully created!');
-            console.log(`Shares successfully created. Tx Hash: ${result}`);
-            Meteor.call('assets.sync', vaultAddress); // Upsert Assets Collection
-            Meteor.call('vaults.syncVaultById', doc.id);
-            return vaultContract.totalSupply();
-          })
-          .catch((error) => {
-            console.log(error);
-            Session.set('NetworkStatus', {
-              isInactive: false,
-              isMining: false,
-              isError: true,
-              isMined: false,
-            });
-            toastr.error(
-              'Oops, an error has occurred. Please verify that your holdings allow you to invest in this fund!',
-            );
+          Session.set('NetworkStatus', {
+            isInactive: false,
+            isMining: false,
+            isError: false,
+            isMined: true,
           });
+          toastr.success('Shares successfully created!');
+          Meteor.call('assets.sync', vaultAddress); // Upsert Assets Collection
+          Meteor.call('vaults.syncVaultById', doc.id);
+          return vaultContract.totalSupply();
+        })
+        .catch((error) => {
+          console.log(error);
+          Session.set('NetworkStatus', {
+            isInactive: false,
+            isMining: false,
+            isError: true,
+            isMined: false,
+          });
+          toastr.error(
+            'Oops, an error has occurred. Please verify that your holdings allow you to invest in this fund!',
+          );
+        });
         templateInstance.find('input#total').value = '';
         templateInstance.find('input#volume').value = '';
         window.scrollTo(0, 0);
