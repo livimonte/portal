@@ -39,7 +39,7 @@ exports.cryptoCompare = '0xAA959664FE49c5734748d80d11805c3909d9B147';
 
 // Exchanges
 
-exports.exchange = '0x47c158e0412a81a2dc330b6818522656519daafc';
+exports.exchange = '0x81bfb6a2db736c5ec06ddf4654478cf78b3e0be7';
 
 // Universe
 
