@@ -11,10 +11,10 @@ const KOVAN_NETWORK_ID = 42;
 
 // TODO Addresses are curr case sensitive!
 exports.etherToken = '0x1a825e9bf3bdc8ef8b975f97c78b5208a947d0ec';
-exports.melonToken = '0x2a20ff70596e431ab26C2365acab1b988DA8eCCF';
+exports.melonToken = '0x2a20ff70596e431ab26c2365acab1b988da8eccf';
 exports.bitcoinToken = '0xf53e3b6c12f8c66324a64f31277260c06d869732';
 exports.euroToken = '0xcaac95ab4d30ee8d6162e55eb3430134fec5af50';
-exports.repToken = '0x64aF87A36a407732320c4dc1852dEBC60cd81c5E';
+exports.repToken = '0x64af87a36a407732320c4dc1852debc60cd81c5e';
 exports.statusToken = '0x64c4406c58c512f326d83065a72f12884105520b';
 exports.aventcoinToken = '0x20a0e0dece9fb6c690cdb439db2b385d271bda3f';
 exports.bancorToken = '0x764ae227ad6a6e143546772169265d76aa9337c6';
