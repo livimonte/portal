@@ -66,15 +66,6 @@ Template.portalNew.events({
     const PORTFOLIO_NAME = templateInstance.find('input#portfolio_name').value;
     const PORTFOLIO_SYMBOL = 'MLN-P';
     const PORTFOLIO_DECIMALS = 18;
-    console.log(
-      PORTFOLIO_NAME,
-      PORTFOLIO_SYMBOL,
-      PORTFOLIO_DECIMALS,
-      addressList.universe,
-      addressList.participation,
-      addressList.riskMgmt,
-      addressList.rewards,
-    );
     const gasLimit = store.getState().web3.gasLimit;
 
     // Deploy
