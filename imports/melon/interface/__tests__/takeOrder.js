@@ -58,14 +58,14 @@ test('with lower quantity -> take as specified', async () => {
 
   expect(result).toBeTruthy();
   expect(result.executedQuantity.eq('1')).toBeTruthy();
-  // expect(
-  //   contract.mockInspect.instance.takeOrder,
-  // ).toHaveBeenCalledWith(
-  //   addressList.exchange,
-  //   6870,
-  //   new BigNumber('1000000000000000000'),
-  //   {
-  //     from: '0xMANAGER',
-  //   },
-  // );
+  expect(
+    contract.mockInspect.instance.takeOrder,
+  ).toHaveBeenCalledWith(
+    addressList.exchange,
+    6870,
+    new BigNumber('1000000000000000000'),
+    {
+      from: '0xMANAGER',
+    },
+  );
 });

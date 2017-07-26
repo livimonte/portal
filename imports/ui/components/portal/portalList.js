@@ -16,7 +16,6 @@ Template.portalList.onCreated(() => {
   Meteor.subscribe('vaults');
   const managerAddress = Session.get('selectedAccount');
   const vaultAddress = Vaults.findOne({ owner: managerAddress }).address;
-  console.log('heeeeeeere ', vaultAddress);
   store.dispatch(vaultCreators.requestCalculations(vaultAddress));
   store.dispatch(vaultCreators.requestParticipation(vaultAddress, managerAddress));
   const template = Template.instance();

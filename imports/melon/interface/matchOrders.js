@@ -14,7 +14,6 @@ const matchOrders = (orderType: OrderTypes, priceThreshold: BigNumber, orders: A
   if (orderType === 'sell') {
     return orders
       .filter(order => getPrices(order).sell.lte(priceThreshold))
-      // .sort((a, b) => (getPrices(a).sell.gt(getPrices(b).sell) ? -1 : 1));
       .sort((a, b) => {
         if (getPrices(a).sell.gt(getPrices(b).sell)) return -1;
         else if (getPrices(a).sell.lt(getPrices(b).sell)) return 1;
@@ -25,7 +24,6 @@ const matchOrders = (orderType: OrderTypes, priceThreshold: BigNumber, orders: A
   } else if (orderType === 'buy') {
     return orders
       .filter(order => getPrices(order).buy.gte(priceThreshold))
-      // .sort((a, b) => (getPrices(a).buy.gt(getPrices(b).buy) ? -1 : 1));
       .sort((a, b) => {
         if (getPrices(a).buy.gt(getPrices(b).buy)) return -1;
         else if (getPrices(a).buy.lt(getPrices(b).buy)) return 1;
