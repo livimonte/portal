@@ -9,9 +9,16 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import store from '/imports/startup/client/store';
 import { creators } from '/imports/redux/user';
+import { creators as vaultCreators } from '/imports/redux/vault';
+
 
 Template.portalList.onCreated(() => {
   Meteor.subscribe('vaults');
+  const managerAddress = Session.get('selectedAccount');
+  const vaultAddress = Vaults.findOne({ owner: managerAddress }).address;
+  console.log('heeeeeeere ', vaultAddress);
+  store.dispatch(vaultCreators.requestCalculations(vaultAddress));
+  store.dispatch(vaultCreators.requestParticipation(vaultAddress, managerAddress));
   const template = Template.instance();
   template.aumSort = new ReactiveVar(-1);
   template.sharePriceSort = new ReactiveVar(-1);
@@ -50,7 +57,7 @@ Template.portalList.helpers({
       : `/fund/${address}`,
 });
 
-Template.portalList.onRendered(() => {});
+Template.portalList.onRendered(() => { });
 
 Template.portalList.events({
   'click .js-AUM-asc': () => {
