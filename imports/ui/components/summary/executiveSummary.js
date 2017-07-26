@@ -34,6 +34,6 @@ Template.executiveSummary.helpers({
   },
 });
 
-Template.executiveSummary.onRendered(() => {});
+Template.executiveSummary.onRendered(() => { });
 
 Template.executiveSummary.events({});

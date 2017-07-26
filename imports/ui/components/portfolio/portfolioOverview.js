@@ -40,13 +40,13 @@ Template.portfolioOverview.onCreated(() => {
     );
     template.personalStakeValue.set(
       Number(template.personalShareAmount.get()) *
-        Number(template.sharePrice.get()),
+      Number(template.sharePrice.get()),
     );
   });
-  const managerAddress = Session.get('selectedAccount');
-  const vaultAddress = FlowRouter.getParam('address');
-  store.dispatch(creators.requestCalculations(vaultAddress));
-  store.dispatch(creators.requestParticipation(vaultAddress, managerAddress));
+  // const managerAddress = Session.get('selectedAccount');
+  // const vaultAddress = FlowRouter.getParam('address');
+  // store.dispatch(creators.requestCalculations(vaultAddress));
+  // store.dispatch(creators.requestParticipation(vaultAddress, managerAddress));
 });
 
 Template.portfolioOverview.helpers({
@@ -67,7 +67,7 @@ Template.portfolioOverview.helpers({
   isVisitor: () => Template.instance().data.visit,
 });
 
-Template.portfolioOverview.onRendered(() => {});
+Template.portfolioOverview.onRendered(() => { });
 
 Template.portfolioOverview.events({
   'click .delete': () => {

@@ -47,6 +47,21 @@ const orders = [
       // price: 2
     },
   },
+  {
+    _id: '9omLP8c3uu38NYhW6',
+    id: 4,
+    owner: '0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf',
+    isActive: true,
+    buy: {
+      symbol: 'ETH-T',
+      howMuch: new BigNumber('0.500000000000000000'),
+    },
+    sell: {
+      symbol: 'MLN-T',
+      howMuch: new BigNumber('1.000000000000000000'),
+      // price: 2
+    },
+  },
 
   // ...rest
   {
@@ -56,7 +71,7 @@ const orders = [
     isActive: true,
     buy: {
       symbol: 'REP-T',
-      howMuch: new BigNumber('8.55505176'),
+      howMuch: new BigNumber('6'),
     },
     sell: {
       symbol: 'ETH-T',
@@ -69,8 +84,22 @@ const orders = [
     owner: '0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf',
     isActive: true,
     buy: {
-      symbol: 'BTC-T',
-      howMuch: new BigNumber('7.900000'),
+      symbol: 'REP-T',
+      howMuch: new BigNumber('8'),
+    },
+    sell: {
+      symbol: 'ETH-T',
+      howMuch: new BigNumber('1.000000000000000000'),
+    },
+  },
+  {
+    _id: '3HgxC35zXnsfR6vft',
+    id: 51,
+    owner: '0x00e0b33cdb3af8b55cd8467d6d13bc0ba8035acf',
+    isActive: true,
+    buy: {
+      symbol: 'REP-T',
+      howMuch: new BigNumber('6'),
     },
     sell: {
       symbol: 'ETH-T',

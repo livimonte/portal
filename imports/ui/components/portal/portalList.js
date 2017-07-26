@@ -9,6 +9,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import store from '/imports/startup/client/store';
 import { creators } from '/imports/redux/user';
+import { creators as vaultCreators } from '/imports/redux/vault';
+
 
 Template.portalList.onCreated(() => {
   Meteor.subscribe('vaults');
@@ -50,7 +52,7 @@ Template.portalList.helpers({
       : `/fund/${address}`,
 });
 
-Template.portalList.onRendered(() => {});
+Template.portalList.onRendered(() => { });
 
 Template.portalList.events({
   'click .js-AUM-asc': () => {

@@ -1,6 +1,8 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
+import store from '/imports/startup/client/store';
+import { creators } from '/imports/redux/vault';
 // Import to load these templates
 import '/imports/ui/layouts/main';
 import '/imports/ui/layouts/header';
@@ -52,7 +54,8 @@ FlowRouter.route('/visit/:address', {
 
 FlowRouter.route('/fund/:address', {
   name: 'fund',
-  action() {
+  action(params) {
+    store.dispatch(creators.requestCalculations(params.address));
     BlazeLayout.render('layoutMain', {
       nav: 'layoutHeader',
       header: 'uxPortfolioOverview',

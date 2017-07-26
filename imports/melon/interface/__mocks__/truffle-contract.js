@@ -9,7 +9,7 @@ const instance = {
       }),
   ),
   takeOrder: jest.fn(
-    (exchange, id, quantity, objects) =>
+    (exchange, id, quantity, { from: fromAddress }) =>
       new Promise((resolve) => {
         resolve({ transactionHash: '0xBLUB' });
       }),

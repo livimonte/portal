@@ -4,10 +4,19 @@ import { Session } from 'meteor/session';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { EthTools } from 'meteor/ethereum:tools';
 
+import Vaults from '/imports/api/vaults';
+
+import store from '/imports/startup/client/store';
+import { creators } from '/imports/redux/vault';
 // Corresponding html file
 import './walletOverview.html';
 
-Template.walletOverview.onCreated(() => {});
+Template.walletOverview.onCreated(() => {
+  const managerAddress = Session.get('selectedAccount');
+  const vaultAddress = Vaults.findOne({ owner: managerAddress }).address;
+  store.dispatch(creators.requestCalculations(vaultAddress));
+  store.dispatch(creators.requestParticipation(vaultAddress, managerAddress));
+});
 
 Template.walletOverview.helpers({
   wallets() {
@@ -18,7 +27,7 @@ Template.walletOverview.helpers({
   },
 });
 
-Template.walletOverview.onRendered(() => {});
+Template.walletOverview.onRendered(() => { });
 
 Template.walletOverview.events({
   'click .refresh_wallet': (event) => {
