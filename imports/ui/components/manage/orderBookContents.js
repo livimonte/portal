@@ -58,7 +58,12 @@ Template.orderBookContents.helpers({
     const orders = getOrders(orderType);
     const priceThreshold = getPrices(order)[orderType];
     const matchedOrders = matchOrders(orderType, priceThreshold, orders);
-    return cumulativeVolume(orderType, matchedOrders).toNumber().toFixed(4);
+    const arrangedOrders = orderType === 'sell' ?
+      matchedOrders.reverse() : matchedOrders;
+    const currentIndex = arrangedOrders.findIndex(elem => elem.id === order.id);
+    const slicedOrders = arrangedOrders.slice(0, currentIndex + 1);
+
+    return cumulativeVolume(orderType, slicedOrders).toNumber().toFixed(4);
   },
   percentageOfTotalVolume(order, orderType) {
     const orders = getOrders(orderType);

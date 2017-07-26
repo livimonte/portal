@@ -16,5 +16,5 @@ test('buy 1.5 MLN from two orders: one full and one partial', async () => {
 
   expect(result).toBeTruthy();
   expect(result.remainingQuantity.eq(0)).toBeTruthy();
-  expect(result.transactions).toHaveLength(2);
+  expect(result.transactions).toHaveLength(1);
 });

@@ -74,8 +74,8 @@ export const reducer = (state = initialState, action) => {
         total: new BigNumber(volume || 0)
           .times(state.averagePrice || 0)
           .toPrecision(
-            getTokenPrecisionBySymbol(state.currentAssetPair.baseTokenSymbol),
-          ),
+          getTokenPrecisionBySymbol(state.currentAssetPair.baseTokenSymbol),
+        ),
       };
     }
     case types.CHANGE_TOTAL: {
@@ -88,8 +88,8 @@ export const reducer = (state = initialState, action) => {
         volume: new BigNumber(total || 0)
           .div(state.averagePrice)
           .toPrecision(
-            getTokenPrecisionBySymbol(state.currentAssetPair.quoteTokenSymbol),
-          ),
+          getTokenPrecisionBySymbol(state.currentAssetPair.quoteTokenSymbol),
+        ),
       };
     }
     case types.SELECT_ASSET_PAIR: {
@@ -170,13 +170,13 @@ export const middleware = store => next => (action) => {
           store.dispatch(
             creators.loadOrder({
               theirOrderType,
-              volume: volume.toPrecision(
+              volume: getTokenPrecisionBySymbol(baseTokenSymbol) === 0 ? volume.toString() : volume.toPrecision(
                 getTokenPrecisionBySymbol(baseTokenSymbol),
               ),
               averagePrice: averagePrice.toPrecision(
                 getTokenPrecisionBySymbol(quoteTokenSymbol),
               ),
-              total: total.toPrecision(
+              total: getTokenPrecisionBySymbol(baseTokenSymbol) === 0 ? total.toString() : total.toPrecision(
                 getTokenPrecisionBySymbol(baseTokenSymbol),
               ),
             }),
