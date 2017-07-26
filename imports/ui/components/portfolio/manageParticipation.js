@@ -186,18 +186,18 @@ Template.manageParticipation.events({
           Meteor.call('vaults.syncVaultById', doc.id);
           return vaultContract.totalSupply();
         })
-        .catch((error) => {
-          console.log(error);
-          Session.set('NetworkStatus', {
-            isInactive: false,
-            isMining: false,
-            isError: true,
-            isMined: false,
+          .catch((error) => {
+            console.log(error);
+            Session.set('NetworkStatus', {
+              isInactive: false,
+              isMining: false,
+              isError: true,
+              isMined: false,
+            });
+            toastr.error(
+              'Oops, an error has occurred. Please verify that your holdings allow you to invest in this fund!',
+            );
           });
-          toastr.error(
-            'Oops, an error has occurred. Please verify that your holdings allow you to invest in this fund!',
-          );
-        });
         templateInstance.find('input#total').value = '';
         templateInstance.find('input#volume').value = '';
         window.scrollTo(0, 0);
