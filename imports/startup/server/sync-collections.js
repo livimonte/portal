@@ -23,6 +23,6 @@ Meteor.startup(() => {
     Orders.watch();
 
     Trades.remove({});
-    // Trades.watch();
+    Trades.watch();
   }
 });
