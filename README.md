@@ -103,7 +103,8 @@ synced from the blockchain.
 
 
 [gitter-badge]: https://img.shields.io/gitter/room/melonproject/general.js.svg?style=flat-square
-[gitter-url]: https://gitter.im/melonproject/general?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge[license-badge]: https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square
+[gitter-url]: https://gitter.im/melonproject/general?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[license-badge]: https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square
 [license-badge-url]: ./LICENSE
 [dependencies-badge]: https://img.shields.io/david/melonproject/portal.svg?style=flat-square
 [dependencies-badge-url]: https://david-dm.org/melonproject/portal
