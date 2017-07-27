@@ -1,7 +1,6 @@
+import { performCalculations, getParticipation } from '@melonproject/melon.js';
 import { Meteor } from 'meteor/meteor';
 import Vaults from '/imports/api/vaults';
-import performCalculations from '/imports/melon/interface/performCalculations';
-import getParticipation from '/imports/melon/interface/getParticipation';
 
 export const initialState = {
   gav: undefined,
