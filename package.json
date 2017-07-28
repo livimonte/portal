@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/portal",
-  "version": "0.1.1",
+  "version": "0.2.2",
   "private": true,
   "scripts": {
     "start": "meteor --settings ./settings/dev.json",
@@ -16,7 +16,8 @@
     "test:chimp:watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests",
     "test:chimp:once": "chimp --ddp=http://localhost:3000 --mocha --path=tests",
     "format": "prettier-eslint --write \"imports/**/*.js\"",
-    "deploy:0.2.1": "mup deploy --config=.mup/0.2.1.js --settings=./settings/0.2.1-sync.json"
+    "deploy:0.2.2": "mup deploy --config=.mup/0.2.2.js --settings=./settings/0.2.2-sync.json",
+    "logs": "mup logs --config=.mup/0.2.2.js -f --tail=200"
   },
   "eslintConfig": {
     "env": {

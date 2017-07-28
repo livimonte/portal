@@ -3,11 +3,13 @@ import { OrderedMap } from 'immutable';
 import BigNumber from 'bignumber.js';
 import type {
   Networks,
-  ObservedState,
-  DerivedState,
-  ReadyState,
-  State,
+    ObservedState,
+    DerivedState,
+    ReadyState,
+    State,
 } from '../web3.js';
+
+const ACCEPTED_BLOCK_DISCREPANCY = 5;
 
 const isNetworkSupported = (network: Networks): boolean =>
   ['Kovan'].includes(network);
@@ -27,16 +29,16 @@ const getReadyState = (observedState: ObservedState): DerivedState => {
     ...observedState,
     // we accept the server to be one block ahead/behind, but not more
     isServerConnected:
-      Math.abs(
-        observedState.currentBlock - observedState.currentBlockWebServer,
-      ) <= 1 &&
-        Math.abs(
-          observedState.currentBlock - observedState.currentBlockSyncServer,
-        ) <= 1 &&
-        Math.abs(
-          observedState.currentBlockWebServer -
-            observedState.currentBlockSyncServer,
-        ) <= 1,
+    Math.abs(
+      observedState.currentBlock - observedState.currentBlockWebServer,
+    ) <= ACCEPTED_BLOCK_DISCREPANCY &&
+    Math.abs(
+      observedState.currentBlock - observedState.currentBlockSyncServer,
+    ) <= ACCEPTED_BLOCK_DISCREPANCY &&
+    Math.abs(
+      observedState.currentBlockWebServer -
+      observedState.currentBlockSyncServer,
+    ) <= ACCEPTED_BLOCK_DISCREPANCY,
   };
   const readyState = stateMap.findKey(value => value(derivedState));
 

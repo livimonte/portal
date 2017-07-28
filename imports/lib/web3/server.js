@@ -1,13 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import Web3 from 'web3';
 
-const localNode = 'http://localhost:8547';
+const localNode = 'http://localhost:8545';
 const kovanNode = 'https://kovan.melonport.com';
 
 export default (() => {
   if (Meteor.isClient) return null;
 
   if (new Web3(new Web3.providers.HttpProvider(localNode)).isConnected()) {
+    console.log('connected to local node');
     return new Web3(new Web3.providers.HttpProvider(localNode));
   } else if (new Web3(new Web3.providers.HttpProvider(kovanNode)).isConnected()) {
     return new Web3(new Web3.providers.HttpProvider(kovanNode));
