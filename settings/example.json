@@ -1,6 +1,7 @@
 {
   "private": {
-    "SENTRY_DSN": "https://*:*@sentry.io/*"
+    "SENTRY_DSN": "https://*:*@sentry.io/*",
+    "JSON_RPC_URL": "http://*:8545"
   },
   "public": {
     "analyticsSettings": {
