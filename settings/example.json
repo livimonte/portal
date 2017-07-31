@@ -1,7 +1,7 @@
 {
   "private": {
     "SENTRY_DSN": "https://*:*@sentry.io/*",
-    "JSON_RPC_URL": "http://*:8545"
+    "JSON_RPC_URL": "https://kovan.melonport.com"
   },
   "public": {
     "analyticsSettings": {

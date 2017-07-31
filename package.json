@@ -10,9 +10,7 @@
     "jest:watch": "jest --watch",
     "pretest": "npm run lint --silent",
     "testrpc": "testrpc",
-    "deploy:webfront": "DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy melon.network --owner melonproject --settings ./settings/webfront.json",
-    "deploy:sync": "DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy melon-sync.eu.meteorapp.com --owner melonproject --settings ./settings/blockchain-sync.json",
-    "deploy:stage": "DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy staging.melon.network --owner melonproject --settings ./settings/stage.json",
+    "deploy:web": "DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy 0.2.0.web.deploys.melon.network --owner melonproject --settings ./settings/web.json",
     "test:chimp:watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests",
     "test:chimp:once": "chimp --ddp=http://localhost:3000 --mocha --path=tests",
     "format": "prettier-eslint --write \"imports/**/*.js\"",
@@ -27,20 +25,11 @@
     },
     "extends": "@meteorjs/eslint-config-meteor",
     "rules": {
-      "max-len": [
-        "error",
-        80,
-        2
-      ]
+      "max-len": ["error", 80, 2]
     }
   },
   "babel": {
-    "presets": [
-      "flow",
-      "meteor",
-      "es2015",
-      "react"
-    ]
+    "presets": ["flow", "meteor", "es2015", "react"]
   },
   "dependencies": {
     "@melonproject/protocol": "0.2.0-alpha.17",
