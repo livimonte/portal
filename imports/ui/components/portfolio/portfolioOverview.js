@@ -43,10 +43,10 @@ Template.portfolioOverview.onCreated(() => {
       Number(template.sharePrice.get()),
     );
   });
-  // const managerAddress = Session.get('selectedAccount');
-  // const vaultAddress = FlowRouter.getParam('address');
-  // store.dispatch(creators.requestCalculations(vaultAddress));
-  // store.dispatch(creators.requestParticipation(vaultAddress, managerAddress));
+  const managerAddress = Session.get('selectedAccount');
+  const vaultAddress = FlowRouter.getParam('address');
+  store.dispatch(creators.requestCalculations(vaultAddress));
+  store.dispatch(creators.requestParticipation(vaultAddress, managerAddress));
 });
 
 Template.portfolioOverview.helpers({

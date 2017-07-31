@@ -85,6 +85,6 @@ Template.portfolioContents.helpers({
   },
 });
 
-Template.portfolioContents.onRendered(() => {});
+Template.portfolioContents.onRendered(() => { });
 
 Template.portfolioContents.events({});
