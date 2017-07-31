@@ -30,7 +30,7 @@
             </tr>
           </thead>
           <tbody>
-            {{#each assets}}
+            {{#each assets}} {{#if this.holdings}}
             <tr>
               <td>
                 <a class="table-link" href="https://kovan.etherscan.io/address/{{this.address}}" target="_blank" rel="noopener">
@@ -46,7 +46,7 @@
               <td>{{portfolioPercentage}}</td>
               <td>{{change24h}}</td>
             </tr>
-            {{/each}}
+            {{/if}} {{/each}}
           </tbody>
         </table>
       </div>

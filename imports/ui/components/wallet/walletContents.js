@@ -71,25 +71,23 @@ Template.walletContents.onRendered(() => {
 });
 
 Template.walletContents.events({
-  'click .convert_to_eth': (event) => {
+  'click .js-convert-to-keth': (event) => {
     // Prevent default browser form submit
     event.preventDefault();
 
     const EtherToken = contract(EtherTokenJson);
     EtherToken.setProvider(web3.currentProvider);
-
-    // Convert Eth Token
     const assetAddress = specs.getTokenAddress('ETH-T');
     const assetHolderAddress = FlowRouter.getParam('address');
-    const doc = Assets.findOne(
+
+    const vault = Assets.findOne(
       { address: assetAddress, holder: assetHolderAddress },
       { sort: { createdAt: -1 } },
     );
-    if (doc === undefined) return '';
-    const holdings = parseInt(doc.holdings, 10);
+    if (vault === undefined) return '';
+    const holdings = parseInt(vault.holdings, 10);
     if (holdings === 0) {
-      // TODO replace toast
-      // Materialize.toast('All ETH Token already converted', 4000, 'blue');
+      toastr.error('All ETH Token already converted', 'Error', 'blue');
     } else {
       console.log(`Holdings: ${holdings}`);
       EtherToken.at(assetAddress).withdraw(holdings, { from: assetHolderAddress }).then((result) => {
@@ -99,12 +97,9 @@ Template.walletContents.events({
           isError: false,
           isMined: true,
         });
-        // TODO insert txHash into appropriate collection
-        console.log(`Tx Hash: ${result}`);
+        console.log(`Tx Hash: ${result}`, result);
         Meteor.call('assets.sync', assetHolderAddress); // Upsert Assets Collection
-        // Notification
-        // TODO replace toast
-        // Materialize.toast('All ETH Token converted', 4000, 'green');
+        toastr.success('All ETH Token converted', 'Success', 'green');
       });
     }
   },
