@@ -32,7 +32,7 @@ const assetPairs = [...Array(numberOfQuoteTokens * numberOfBaseTokens).keys()]
       '/',
       specs.getQuoteTokens()[index % numberOfQuoteTokens],
     ].join(''),
-  )
+)
   .sort();
 
 FlowRouter.triggers.enter(
