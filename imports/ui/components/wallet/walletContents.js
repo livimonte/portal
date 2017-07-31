@@ -7,8 +7,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 // Smart Contracts
 import contract from 'truffle-contract';
 import EtherTokenJson from '@melonproject/protocol/build/contracts/EtherToken.json';
-import addressList from '/imports/melon/interface/addressList';
-
 
 import web3 from '/imports/lib/web3/client';
 // Collections
