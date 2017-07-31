@@ -77,16 +77,15 @@ Template.walletContents.events({
 
     const EtherToken = contract(EtherTokenJson);
     EtherToken.setProvider(web3.currentProvider);
-
-    // Convert Eth Token
     const assetAddress = specs.getTokenAddress('ETH-T');
     const assetHolderAddress = FlowRouter.getParam('address');
-    const doc = Assets.findOne(
+
+    const vault = Assets.findOne(
       { address: assetAddress, holder: assetHolderAddress },
       { sort: { createdAt: -1 } },
     );
-    if (doc === undefined) return '';
-    const holdings = parseInt(doc.holdings, 10);
+    if (vault === undefined) return '';
+    const holdings = parseInt(vault.holdings, 10);
     if (holdings === 0) {
       toastr.error('All ETH Token already converted', 'Error', 'blue');
     } else {
@@ -98,10 +97,8 @@ Template.walletContents.events({
           isError: false,
           isMined: true,
         });
-        // TODO insert txHash into appropriate collection
         console.log(`Tx Hash: ${result}`, result);
         Meteor.call('assets.sync', assetHolderAddress); // Upsert Assets Collection
-        // Notification
         toastr.success('All ETH Token converted', 'Success', 'green');
       });
     }
