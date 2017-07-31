@@ -7,6 +7,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 // Smart Contracts
 import contract from 'truffle-contract';
 import EtherTokenJson from '@melonproject/protocol/build/contracts/EtherToken.json';
+import addressList from '/imports/melon/interface/addressList';
+
 
 import web3 from '/imports/lib/web3/client';
 // Collections
@@ -71,7 +73,7 @@ Template.walletContents.onRendered(() => {
 });
 
 Template.walletContents.events({
-  'click .convert_to_eth': (event) => {
+  'click .js-convert-to-keth': (event) => {
     // Prevent default browser form submit
     event.preventDefault();
 
@@ -88,8 +90,7 @@ Template.walletContents.events({
     if (doc === undefined) return '';
     const holdings = parseInt(doc.holdings, 10);
     if (holdings === 0) {
-      // TODO replace toast
-      // Materialize.toast('All ETH Token already converted', 4000, 'blue');
+      toastr.error('All ETH Token already converted', 'Error', 'blue');
     } else {
       console.log(`Holdings: ${holdings}`);
       EtherToken.at(assetAddress).withdraw(holdings, { from: assetHolderAddress }).then((result) => {
@@ -100,11 +101,10 @@ Template.walletContents.events({
           isMined: true,
         });
         // TODO insert txHash into appropriate collection
-        console.log(`Tx Hash: ${result}`);
+        console.log(`Tx Hash: ${result}`, result);
         Meteor.call('assets.sync', assetHolderAddress); // Upsert Assets Collection
         // Notification
-        // TODO replace toast
-        // Materialize.toast('All ETH Token converted', 4000, 'green');
+        toastr.success('All ETH Token converted', 'Success', 'green');
       });
     }
   },
