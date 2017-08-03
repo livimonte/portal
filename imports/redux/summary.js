@@ -67,13 +67,6 @@ export const middleware = store => next => (action) => {
         }
         informations.ranking = `${ranking} out of ${numberOfVaults}`;
         performCalculations(vault.address).then((calculations) => {
-          // const serializedCalculations = Object.keys(calculations).reduce(
-          //   (accumulator, currentKey) => ({
-          //     ...accumulator,
-          //     [currentKey]: calculations[currentKey].toString(),
-          //   }),
-          //   {},
-          // );
           informations.sharePrice = calculations.sharePrice.toString();
           store.dispatch(creators.updateInformations(informations));
         });
