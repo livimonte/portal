@@ -6,17 +6,24 @@ import '/imports/ui/components/ux/uxSpinner';
 // Collections
 import Vaults from '/imports/api/vaults';
 import store from '/imports/startup/client/store';
+import { creators } from '/imports/redux/summary';
+
 // Corresponding html file
 import './melonSummary.html';
 
 Template.melonSummary.onCreated(() => {
   const template = Template.instance();
   template.readyState = new ReactiveVar();
-
+  template.ranking = new ReactiveVar();
   store.subscribe(() => {
     const currentState = store.getState().web3;
     template.readyState.set(currentState.readyState);
+    const summaryState = store.getState().summary;
+    template.ranking.set(summaryState.ranking);
   });
+  store.dispatch(
+    creators.requestInformations(Session.get('selectedAccount')),
+  );
 });
 
 Template.melonSummary.helpers({
@@ -28,29 +35,10 @@ Template.melonSummary.helpers({
     return networkStatus.isMining ? 'Sending ...' : readyState;
   },
   getRanking() {
-    const numberOfVaults = Vaults.find().count();
-    let coreAddress = FlowRouter.getParam('address');
-
-    if (Vaults.find({ owner: Session.get('selectedAccount') }).count() !== 0) {
-      coreAddress = Vaults.findOne({ owner: Session.get('selectedAccount') })
-        .address;
-      const sortedVaults = Vaults.find(
-        {},
-        { sort: { sharePrice: -1, createdAt: -1 } },
-      ).fetch();
-      let ranking;
-      for (let i = 0; i < sortedVaults.length; i++) {
-        if (coreAddress == sortedVaults[i].address) {
-          ranking = i + 1;
-          break;
-        }
-      }
-      return `${ranking} out of ${numberOfVaults}`;
-    }
-    return 'No ranking available.';
+    return Template.instance().ranking.get();
   },
 });
 
-Template.melonSummary.onRendered(() => {});
+Template.melonSummary.onRendered(() => { });
 
 Template.melonSummary.events({});

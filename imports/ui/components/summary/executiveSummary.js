@@ -13,11 +13,13 @@ Template.executiveSummary.onCreated(() => {
   const template = Template.instance();
   Meteor.subscribe('vaults');
   template.sharePrice = new ReactiveVar(0);
+  template.fundName = new ReactiveVar('');
   store.subscribe(() => {
     const currentState = store.getState().summary;
     template.sharePrice.set(
       new BigNumber(currentState.sharePrice || 0).toString(),
     );
+    template.fundName.set(currentState.fundName);
   });
   if (FlowRouter.getParam('address')) {
     store.dispatch(
@@ -31,6 +33,9 @@ Template.executiveSummary.helpers({
     const template = Template.instance();
     const finneySharePrice = (template.sharePrice.get() * 1000).toFixed(1);
     return finneySharePrice;
+  },
+  getFundName() {
+    return Template.instance().fundName.get();
   },
 });
 
