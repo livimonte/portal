@@ -4,7 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import BigNumber from 'bignumber.js';
 
 import store from '/imports/startup/client/store';
-import { creators } from '/imports/redux/vault';
+import { creators } from '/imports/redux/summary';
 
 // Corresponding html file
 import './executiveSummary.html';
@@ -13,15 +13,17 @@ Template.executiveSummary.onCreated(() => {
   const template = Template.instance();
   Meteor.subscribe('vaults');
   template.sharePrice = new ReactiveVar(0);
+  template.fundName = new ReactiveVar('');
   store.subscribe(() => {
-    const currentState = store.getState().vault;
+    const currentState = store.getState().summary;
     template.sharePrice.set(
       new BigNumber(currentState.sharePrice || 0).toString(),
     );
+    template.fundName.set(currentState.fundName);
   });
   if (FlowRouter.getParam('address')) {
     store.dispatch(
-      creators.requestCalculations(FlowRouter.getParam('address')),
+      creators.requestInformations(Session.get('selectedAccount')),
     );
   }
 });
@@ -31,6 +33,9 @@ Template.executiveSummary.helpers({
     const template = Template.instance();
     const finneySharePrice = (template.sharePrice.get() * 1000).toFixed(1);
     return finneySharePrice;
+  },
+  getFundName() {
+    return Template.instance().fundName.get();
   },
 });
 

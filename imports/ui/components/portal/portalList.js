@@ -50,6 +50,7 @@ Template.portalList.helpers({
     Template.instance().data.main() === 'visit'
       ? `/visit/${address}`
       : `/fund/${address}`,
+  getRanking: (index) => index + 1,
 });
 
 Template.portalList.onRendered(() => { });

@@ -13,6 +13,11 @@ import web3 from '/imports/redux/web3';
 import user from '/imports/redux/user';
 import userMiddleware from '/imports/redux/middlewares/user';
 import Raven from '/imports/startup/utils/raven';
+import {
+  default as summary,
+  middleware as summaryMiddleware,
+} from '/imports/redux/summary';
+
 
 export default createStore(
   combineReducers({
@@ -20,6 +25,7 @@ export default createStore(
     web3,
     vault,
     user,
+    summary,
   }),
   {
     /* preloadedState */
@@ -30,6 +36,7 @@ export default createStore(
       vaultMiddleware,
       userMiddleware,
       createRavenMiddleware(Raven),
+      summaryMiddleware,
     ),
     /* eslint-disable no-underscore-dangle */
     window.__REDUX_DEVTOOLS_EXTENSION__

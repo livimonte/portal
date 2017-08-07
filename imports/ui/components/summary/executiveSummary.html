@@ -22,7 +22,7 @@
       <p class="status">Fund</p>
       {{#if hasManagerCreatedVault}}
       <p class="value">
-        <a href="/fund/{{getManagerAddressOfVault}}" class="truncate green-text text-lighten-2">{{getManagerNameOfVault}}</a>
+        <a href="/fund/{{getManagerAddressOfVault}}" class="truncate green-text text-lighten-2">{{getFundName}}</a>
       </p>
       {{else}} {{#if selectedAccount}}
       <p class="value">
