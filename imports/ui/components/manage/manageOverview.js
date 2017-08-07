@@ -54,16 +54,14 @@ Tracker.autorun(() => {
 
     if (fromPortfolio && vault) {
       FlowRouter.setParams({ address: vault.address });
-    } else if (Session.get('selectedAccount')) {
-      FlowRouter.setParams({ address: Session.get('selectedAccount') });
     }
   }
 });
 
 Template.manageOverview.onCreated(() => {
   Meteor.subscribe('vaults');
-  Meteor.call('assets.sync', FlowRouter.getParam('address'));
   Meteor.subscribe('assets', FlowRouter.getParam('address'));
+  Meteor.call('assets.sync', FlowRouter.getParam('address'));
   const template = Template.instance();
   template.currentAssetPair = new ReactiveVar(
     store.getState().manageHoldings.currentAssetPair,
@@ -96,6 +94,7 @@ Template.manageOverview.helpers({
   isFromPortfolio: () => (Session.get('fromPortfolio') ? 'checked' : ''),
   getPortfolioDoc() {
     const address = FlowRouter.getParam('address');
+    console.log(address);
     const doc = Vaults.findOne({ address });
     return doc === undefined || address === undefined ? '' : doc;
   },
