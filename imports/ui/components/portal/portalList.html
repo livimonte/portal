@@ -11,13 +11,13 @@
                   <table id="table-portal-overview" class="table table-bordered table-hover mp-daemon-table mp-daemon-table-data mp-portal-table"
                     style="width:100%;">
                     <tr>
-                      <th style="width:25%">Ranking
+                      <th style="width:10%">Ranking
                         <p></p>
                       </th>
                       <th style="width:25%">Manager
                         <p>(Identicon)</p>
                       </th>
-                      <th style="width:40%">Portfolio
+                      <th style="width:35%">Portfolio
                         <p>(Name)</p>
                       </th>
                       <th style="width:18%">AUM
@@ -42,12 +42,12 @@
                       <tbody>
                         {{#each searchedVaults}}
                         <tr>
-                          <td class="ranking">
+                          <td class="ranking" style="width:15%">
                             <a class="table-link" target="_blank" rel="noopener">
                                 {{getRanking @index}}
                               </a>
                           </td>
-                          <td class="identicon">
+                          <td class="identicon" style="width:15%">
                             <a class="table-link" href="https://kovan.etherscan.io/address/{{owner}}" target="_blank" rel="noopener">
                                 {{> dapp_identicon identity=owner class="dapp-small"}}
                               </a>
