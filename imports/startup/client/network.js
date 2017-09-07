@@ -5,6 +5,8 @@ import web3 from '/imports/lib/web3/client';
 import store from '/imports/startup/client/store';
 import { creators } from '/imports/redux/web3';
 import { networkMapping } from '/imports/melon/interface/helpers/specs';
+import pkg from '/package.json';
+import protocolPkg from '@melonproject/protocol/package.json';
 
 import Raven from '/imports/startup/utils/raven';
 
@@ -81,6 +83,12 @@ window.addEventListener('load', function() {
   /* eslint-disable no-underscore-dangle */
   window.__AppInitializedBeforeWeb3__ = true;
   /* eslint-enable */
+  console.log('Starting Portal with:\n', {
+    networkId: web3.version.network,
+    version: pkg.version,
+    protocolVersion: protocolPkg.version,
+  });
+
   updateWeb3();
   web3.eth.filter('latest').watch(() => {
     updateWeb3();
