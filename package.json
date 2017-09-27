@@ -1,6 +1,6 @@
 {
   "name": "@melonproject/portal",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "scripts": {
     "start": "meteor --settings ./settings/dev.json",
@@ -10,11 +10,14 @@
     "jest:watch": "jest --watch",
     "pretest": "npm run lint --silent",
     "testrpc": "testrpc",
-    "deploy:web": "DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy 0.2.0.web.deploys.melon.network --owner melonproject --settings ./settings/0.2.2-web.json",
-    "test:chimp:watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests",
+    "deploy:web":
+      "DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy 0.2.0.web.deploys.melon.network --owner melonproject --settings ./settings/0.2.2-web.json",
+    "test:chimp:watch":
+      "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests",
     "test:chimp:once": "chimp --ddp=http://localhost:3000 --mocha --path=tests",
     "format": "prettier-eslint --write \"imports/**/*.js\"",
-    "deploy:0.2.2": "mup deploy --config=.mup/0.2.2.js --settings=./settings/0.2.2-sync.json",
+    "deploy:sync":
+      "mup deploy --config=.mup/0.2.2.js --settings=./settings/0.2.2-sync.json",
     "logs": "mup logs --config=.mup/0.2.2.js -f --tail=200"
   },
   "eslintConfig": {
@@ -25,20 +28,11 @@
     },
     "extends": "@meteorjs/eslint-config-meteor",
     "rules": {
-      "max-len": [
-        "error",
-        80,
-        2
-      ]
+      "max-len": ["error", 80, 2]
     }
   },
   "babel": {
-    "presets": [
-      "flow",
-      "meteor",
-      "es2015",
-      "react"
-    ]
+    "presets": ["flow", "meteor", "es2015", "react"]
   },
   "dependencies": {
     "@melonproject/protocol": "0.2.0-alpha.17",
